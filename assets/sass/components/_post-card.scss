@@ -8,9 +8,17 @@
     grid-template-columns: repeat(1, 1fr) !important;
   }
 }
+.c-post-card__tagtype:hover {
+  transform: scale(1.04);
+  transition-duration: 0.5s;
+}
+.c-post-card:hover {
+  transform: scale(1.04);
+  transition-duration: 0.5s;
+}
 .c-post-card__tagtype {
   background-color: #fff;
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.12);
   padding: 20px !important;
   border-radius: 16px;
   &--main {
@@ -121,7 +129,7 @@
   @include mq($from: desktop) {
     background-color: #fff;
     overflow: hidden;
-    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.12);
   }
 
   &__url {

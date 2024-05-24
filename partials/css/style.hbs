@@ -31,7 +31,7 @@
 }
 
 {{#if @site.title_align}}
-.post-template .c-post-header__title .c-post__title {
+.post-template .c-post-header__title .c-post__title .c-post-image-header-template__title{
   {{#match @site.title_align '=' 'left'}}
   text-align: left;
   {{else match @site.title_align '=' 'right'}}
@@ -44,8 +44,37 @@
 }
 {{/if}}
 
+{{#if @site.title_align}}
+.c-post-image-header-template__title{
+  {{#match @site.title_align '=' 'left'}}
+  text-align: left;
+  {{else match @site.title_align '=' 'right'}}
+  text-align: right;
+  {{else match @site.title_align '=' 'center'}}
+  text-align: center;
+  {{else match @site.title_align '=' 'side'}}
+  text-align: justify;
+  {{/match}}
+}
+{{/if}}
+
+
 {{#if @site.main_align}}
 .post-template .c-content {
+  {{#match @site.main_align '=' 'left'}}
+  text-align: left;
+  {{else match @site.main_align '=' 'right'}}
+  text-align: right;
+  {{else match @site.main_align '=' 'center'}}
+  text-align: center;
+  {{else match @site.main_align '=' 'side'}}
+  text-align: justify;
+  {{/match}}
+}
+{{/if}}
+
+{{#if @site.main_align}}
+.c-post-image-header-template__excerpt {
   {{#match @site.main_align '=' 'left'}}
   text-align: left;
   {{else match @site.main_align '=' 'right'}}

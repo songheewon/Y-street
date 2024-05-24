@@ -69,7 +69,7 @@
           </div>
           </div>
         </div>
-        <div class="c-home-section__main" style="position: relative; overflow: hidden;">
+        <div class="c-home-section__main" style="position: relative; overflow: hidden; padding: 10px;">
           {{#get "posts" filter="tag:{{slug}}" include="tags,authors" order="published_at desc" as |posts|}}
           {{#if posts}}
           <div class="swiper-container c-archive-grid c-home-section__main swiper2-{{@index}}">

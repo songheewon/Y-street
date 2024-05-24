@@ -305,6 +305,8 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
 }
 
 /* Util */
@@ -329,7 +331,6 @@
     width: 100%;
     height: auto;
     overflow: hidden;
-    border-radius: 16px;
   }
 
   &__image {
@@ -340,12 +341,18 @@
 }
 
 /* Main Part */
+.s-product-card:hover {
+  transform: scale(1.04);
+  transition-duration: 0.5s;
+}
+
 .s-product-card {
+  
   &__main {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin: 12px;
   }
 
   &__tag {
