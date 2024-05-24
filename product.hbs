@@ -1,8 +1,893 @@
-{{!< default}} {{#contentFor 'body_custom_class' }} shop-template{{/contentFor}} {{bluedot_product}} {{#if
-    product.payment.is_online_class}} {{#if product.payment_status.is_paid}} <style>
-    .bluedot-product-header {
-    display: none !important;
-    }
-    </style>
+{{!< default}} {{#contentFor 'body_custom_class' }} shop-template{{/contentFor}}
+
+<div class="y-product-header">
+
+    {{#product}}
+    {{#if payment.is_online_class}}
+
+
+{{#if payment_status.is_paid}}
+{{#if payment.purchase.chapters}}
+<div class="bluedot-product-chapters">
+    <div class="bluedot-product-chapter-main">
+        <div class="bluedot-product-chapter-main-content">
+            <video-js id="video-for-chapter" class="vjs-default-skin vjs-big-play-centered" controls
+                preload="auto"></video-js>
+        </div>
+        <div class="bluedot-product-online">온라인 강좌</div>
+        <div class="bluedot-product-title">{{title}}</div>
+        <div class="bluedot-product-excerpt">{{excerpt}}</div>
+        <div class="bluedot-product-date-info">
+            {{#if payment.used_period_days}}
+            <div class="bluedot-product-field">{{payment.period_days_title}}</div>
+            <div class="bluedot-product-date">{{payment.period_days}}일
+                (오늘 구매시 {{payment.period_date_from_now}}까지 이용가능)</div>
+            {{/if}}
+        </div>
+    </div>
+    <div class="bluedot-product-chapter-sidebar">
+        <div class="bluedot-product-chapter-sidebar-content">
+            <div class="bluedot-product-chapter-sidebar-top">
+                <div class="bluedot-product-chapter-length">총 <span
+                        class="bluedot-product-chapter-length-num">{{payment.purchase.chapters.length}}개</span>의 수업
+                </div>
+                {{#if payment.purchase.file.name}}
+                <a href="#"
+                    onclick="downloadURI('/file/{{uuid}}', '{{payment.purchase.file.name}}'); return false;">
+                    <div class="bluedot-product-zip-download">
+                        <svg width="12" height="12" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18 16.875C18 17.4962 17.4962 18 16.875 18H1.125C0.503789 18 0 17.4962 0 16.875C0 16.2538 0.503789 15.75 1.125 15.75H16.875C17.4962 15.75 18 16.2538 18 16.875ZM8.20441 13.3112C8.42414 13.5309 8.71207 13.6406 9 13.6406C9.28793 13.6406 9.57586 13.5309 9.79559 13.3112L13.7816 9.3252C14.2211 8.88574 14.2211 8.17348 13.7816 7.73402C13.3421 7.29457 12.6299 7.29457 12.1904 7.73402L10.125 9.79945V1.125C10.125 0.503789 9.62121 0 9 0C8.37879 0 7.875 0.503789 7.875 1.125V9.7998L5.80957 7.73438C5.37012 7.29492 4.65785 7.29492 4.2184 7.73438C3.77895 8.17383 3.77895 8.88609 4.2184 9.32555L8.20441 13.3116V13.3112Z"
+                                fill="white" />
+                        </svg>
+                        강의자료 다운받기
+                    </div>
+                </a>
+                {{/if}}
+            </div>
+            <div style="border-radius: 10px; overflow:hidden;">
+                {{#each payment.purchase.chapters as |chapter|}}
+                <div class="bluedot-product-chapter-header">
+                    <h3 class="bluedot-product-chapter-lesson-title">{{chapter.title}}</h3>
+                    <span class="bluedot-product-chapter-lesson-length">{{chapter.lessons.length}}개</span>
+                </div>
+
+                <div class="bluedot-product-chapter-list chapter-index-{{chapter.index}}">
+                    <ul>
+                        {{#each lessons as |lesson|}}
+                        <li class="lesson-index-{{lesson.index}} no-have-cover">
+                            <a href="#" class="lesson-link" data-video-uuid="{{lesson.media_uuid}}"
+                                data-video="{{lesson.url}}" data-video-view-current="{{lesson.media_info.view_current}}"
+                                data-video-view-percent="{{lesson.media_info.view_percent}}">
+                                <span class="no">{{lesson.index}}</span>
+                                <span class="title"><span>{{lesson.title}}</span></span>
+
+                                {{#if lesson.media_info}}
+                                <div class="progress">
+                                    <div class="now" style="width:{{lesson.media_info.view_percent}}%"></div>
+                                </div>
+                                {{/if}}
+                            </a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{/if}}
+
     {{/if}}
-    {{/if}}
+      <div class="bluedot-product-wrap {{payment.type}} paid-{{payment_status.is_paid}}">
+        <div class="bluedot-product-header {{#if feature_image}}have-product-cover{{else}}not-have-product-cover{{/if}}">
+
+          <div class="bluedot-product-cover">
+            {{#if feature_image}}
+            <img src="{{ feature_image }}" class="cover" />
+            {{else}}
+            <img src="//storage.googleapis.com/cdn.media.bluedot.so/img/default_product_cover.png"
+                class="cover default-cover" />
+            {{/if}}
+          </div>
+
+          <div class="bluedot-product-info">
+                <h2>{{title}}</h2>
+                {{#if custom_excerpt}}
+                <p>
+                    {{markdown custom_excerpt }}
+                </p>
+                {{/if}}
+
+                {{#if payment.is_webinar}}
+                <div class="bluedot-product-event-wrap">
+                    {{#if payment.event.used_join_date}}
+                    <dl>
+                        <dt>신청기간</dt>
+                        <dd>
+                            {{payment.event.join_date_text}}
+                        </dd>
+                    </dl>
+                    {{/if}}
+                    {{#if payment.used_period_days}}
+                    <dl>
+                        <dt>{{payment.period_days_title}}</dt>
+                        <dd>
+                            {{payment.period_days}}일
+                            (오늘 구매시 {{payment.period_date_from_now}}까지 이용가능)
+                        </dd>
+                    </dl>
+                    {{/if}}
+                </div>
+                {{else}}
+                {{#unless payment_status.is_paid}}
+                {{#if payment.used_period_days}}
+                <div class="bluedot-product-event-wrap">
+                    <dl>
+                        <dt>{{payment.period_days_title}}</dt>
+                        <dd>
+                            {{payment.period_days}}일
+                            (오늘 구매시 {{payment.period_date_from_now}}까지 이용가능)
+                        </dd>
+                    </dl>
+                </div>
+                {{/if}}
+                {{else}}
+                {{#if payment_period.is_period}}
+                <div class="bluedot-product-event-wrap">
+                    <dl>
+                        <dt>{{payment.period_days_title}}</dt>
+                        <dd>
+                            {{#if payment_period.period_is_today}}
+                            오늘 {{payment_period.period_time_at}} 까지 이용가능
+                            {{else}}
+                            {{payment_period.period_at}}까지 이용가능 (구매 후 {{payment.period_days}}일)
+                            {{/if}}
+                        </dd>
+                    </dl>
+                </div>
+                {{/if}}
+                {{/unless}}
+                {{/if}}
+
+                {{#if payment_status.is_paid}}
+                <div class="bluedot-product-info-for-paid{{#if payment.purchase.file}}{{#unless (eq payment.purchase.file.vimeo_state "
+                    done")}} have-file{{else}} have-not-file{{/unless}}{{else}} have-not-file{{/if}}{{#if
+                    payment.purchase.message}} have-message{{else}} have-not-message{{/if}}">
+                    {{!-- 파일 업로드 된 것이 있다면 .. --}}
+
+                    {{#if payment.purchase.file}}
+                    {{#if payment.purchase.file.is_mp4}}
+                    {{#if (eq payment.purchase.file.vimeo_state "ready")}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 업로드 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq payment.purchase.file.vimeo_state "uploading")}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 업로드 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq payment.purchase.file.vimeo_state "renew")}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 새롭게 업로드 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq payment.purchase.file.vimeo_state "done")}}
+                    {{#if payment.purchase.file.vimeo_files}}
+                    {{#if payment.purchase.file.vimeo_files.hls}}
+
+                    {{else}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 컨버팅 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+                    {{else}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 컨버팅 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{else}}
+                    {{#if payment.purchase.file.name}}
+                    <div class="bluedot-product-file file-type-{{payment.purchase.file.ext}}">
+                        {{!-- {{#if payment.purchase.file.is_pdf}} --}}
+                        <div class="file-image file-image-{{payment.purchase.file.ext}}">
+                          {{payment.purchase.file.ext}}
+                          {{#if payment.purchase.file.downloadable}}
+                          <a href="#" class="download"
+                              onclick="downloadURI('/file/{{uuid}}', '{{payment.purchase.file.name}}'); return false;"></a>
+                          {{else}}
+                          <a href="/file/{{uuid}}" class="view"></a>
+                          {{/if}}
+                        </div>
+                        <div class="file-info">
+                          <h3 title="{{payment.purchase.file.name}}">{{payment.purchase.file.name}}</h3>
+                          <p clas="file-type">{{payment.purchase.file.ext}} 파일</p>
+                          <div>
+                              {{!-- NTODO : 구매자에게만 적용되는 보기 / 다운로드 링크 만들기 --}}
+                              {{#if payment.purchase.file.is_pdf}}
+                              <a href="/file/{{uuid}}" class="view">보기</a>
+                              {{#if payment.purchase.file.downloadable}}
+                              <a href="#" class="download"
+                                  onclick="downloadURI('/file/{{uuid}}', '{{payment.purchase.file.name}}'); return false;">다운로드</a>
+                              {{/if}}
+                              {{else}}
+                              {{#if payment.purchase.file.downloadable}}
+                              <a href="#" class="download"
+                                  onclick="downloadURI('/file/{{uuid}}', '{{payment.purchase.file.name}}'); return false;">다운로드</a>
+                              {{else}}
+                              <a href="/file/{{uuid}}">보기</a>
+                              {{/if}}
+                              {{/if}}
+                          </div>
+                        </div>
+                        {{!-- {{/if}} --}}
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{/if}}
+                    {{#if payment.purchase.message}}
+                    <div class="bluedot-product-buyer-message bluedot-markdown">
+                        {{markdown payment.purchase.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{else}}
+
+                {{#if payment_status.is_expired}}
+                {{!-- NTODO : 기한만료된 상태 보이기 --}}
+                {{!-- <div class="bluedot-product-expired">
+                    구매했던 상품의 기한이 만료되었습니다.
+                </div> --}}
+                {{/if}}
+
+                {{/if}}
+
+                {{#if payment_status.is_paid}}
+                <div class="bluedot-product-buttons">
+                    {{#if payment.type}}
+                    {{#if payment.purchase.url}}
+                    {{#if payment.purchase.url_is_text}}
+                    {{!-- URL 부분에 URL 입력하지 않고 일반 텍스트로 입력함 --}}
+                    <div class="bluedot-product-buyer-message bluedot-markdown">{{markdown payment.purchase.url}}</div>
+                    {{else}}
+                    <a class="gh-button gh-button-view gh-button-{{payment.type}}"
+                        href="{{payment.purchase.url}}">{{payment.purchase.button_text}}</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy disabled" href="#">구매완료</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy disabled" href="#">구매완료</a>
+                    {{/if}}
+                </div>
+                {{else}}
+                <div class="bluedot-product-price-wrap">
+                    {{#if payment.have_price_sale}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            {{#if payment.have_price_original}}
+                            무료회원 할인가
+                            {{else}}
+                            무료 회원가
+                            {{/if}}
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{#if @member.paid}}
+                            <i>{{price payment.price emptyText="구매 불가" currency="KRW"}}</i>
+                            {{else}}
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-price-for-subscriber">
+                        <div class="bluedot-product-price-label">
+                            유료 회원가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price_sale currency="KRW"}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-final-price">
+
+                        <div class="bluedot-product-price-label">
+                            결제금액
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{#if @member.paid}}
+                            {{price payment.price_sale emptyText="구매 불가" currency="KRW"}}
+                            {{else}}
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{else}}
+                    {{#unless payment.is_stop_selling}}
+                    {{#if payment.have_price_original}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            판매가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            <i>{{price payment.price_original emptyText="구매 불가" currency="KRW"}}</i>
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            무료회원 할인가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            <span class="bluedot-product-price-percent">{{payment.price_original_sale_percent}}<span
+                                    class="symbol">%</span></span>
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-final-price">
+                        <div class="bluedot-product-price-label">
+                            결제금액
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            판매가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/unless}}
+                    {{/if}}
+                </div>
+
+                <div class="bluedot-product-buttons">
+                    {{#if payment.is_selling}}
+                    {{#if (eq payment.type "webinar")}}
+                    {{#if payment.price_final}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">결제하기</a>
+                    {{else}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">등록하기</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">결제하기</a>
+                    {{/if}}
+                    {{else}}
+                    {{#if payment.is_stop_selling}}
+                    <a class="gh-button gh-button-buy disabled" href="#">판매 종료</a>
+                    {{/if}}
+
+                    {{#if payment.is_soldout}}
+                    <a class="gh-button gh-button-buy disabled" href="#">품절</a>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/if}}
+            </div>
+
+        </div>
+      </div>
+    {{/product}}
+
+</div>
+<div class="o-grid">
+  <div class="o-grid__col o-grid__col--full">
+    <div class="y-product-content__wrap">
+      {{#product}}
+      <div class="y-product-content {{payment.type}} paid-{{payment_status.is_paid}}">
+      {{/product}}
+        <div class="y-product-content__main">{{bluedot_product}}</div>
+
+        <div class="y-product-content__side">
+{{#product}}
+          <div class="bluedot-product-wrapper">
+
+    <div class="bluedot-product-wrap">
+        <div
+            class="bluedot-product-header {{#if feature_image}}have-product-cover{{else}}not-have-product-cover{{/if}}">
+
+            <div class="bluedot-product-info">
+                <h2>{{title}}</h2>
+                {{#if custom_excerpt}}
+                <p>
+                    {{ custom_excerpt }}
+                </p>
+                {{/if}}
+
+                {{#if payment.is_webinar}}
+                <div class="bluedot-product-event-wrap">
+                    {{#if payment.event.type}}
+                    <dl>
+                        <dt>행사유형</dt>
+                        <dd>{{payment.event.type_text}}</dd>
+                    </dl>
+                    {{/if}}
+                    {{#if payment.event.used_event_date}}
+                    <dl>
+                        <dt>행사일정</dt>
+                        <dd>
+                            {{payment.event.event_date_text}}
+                            {{#unless payment.event.event_is_past}}
+                            <span class="label-dday">D - {{payment.event.event_d_day}}</span>
+                            {{/unless}}
+                        </dd>
+                    </dl>
+                    {{/if}}
+                    {{#if payment.event.used_join_date}}
+                    <dl>
+                        <dt>신청기간</dt>
+                        <dd>
+                            {{payment.event.join_date_text}}
+                        </dd>
+                    </dl>
+                    {{/if}}
+                    {{#if payment.used_period_days}}
+                    <dl>
+                        <dt>{{payment.period_days_title}}</dt>
+                        <dd>
+                            {{payment.period_days}}일
+                            (오늘 구매시 {{payment.period_date_from_now}}까지 이용가능)
+                        </dd>
+                    </dl>
+                    {{/if}}
+
+                    {{#if payment.event.place}}
+                    <dl>
+                        <dt>장소</dt>
+                        <dd>
+                            {{payment.event.place}}
+                            {{#if payment.event.online_stream_url}}
+                            {{#if payment_status.is_paid}}
+                            <a class="event-link" href="{{payment.event.online_stream_url}}" target="_blank">참여하기</a>
+                            {{/if}}
+                            {{/if}}
+                        </dd>
+                    </dl>
+                    {{/if}}
+                </div>
+                {{else}}
+                {{#unless payment_status.is_paid}}
+                {{#if payment.used_period_days}}
+                <div class="bluedot-product-event-wrap">
+                    <dl>
+                        <dt>{{payment.period_days_title}}</dt>
+                        <dd>
+                            {{payment.period_days}}일
+                            (오늘 구매시 {{payment.period_date_from_now}}까지 이용가능)
+                        </dd>
+                    </dl>
+                </div>
+                {{/if}}
+                {{else}}
+                {{#if payment_period.is_period}}
+                <div class="bluedot-product-event-wrap">
+                    <dl>
+                        <dt>{{payment.period_days_title}}</dt>
+                        <dd>
+                            {{#if payment_period.period_is_today}}
+                            오늘 {{payment_period.period_time_at}} 까지 이용가능
+                            {{else}}
+                            {{payment_period.period_at}}까지 이용가능 (구매 후 {{payment.period_days}}일)
+                            {{/if}}
+                        </dd>
+                    </dl>
+                </div>
+                {{/if}}
+                {{/unless}}
+                {{/if}}
+
+                {{#if payment_status.is_paid}}
+                <div class="bluedot-product-info-for-paid{{#if payment.purchase.file}}{{#unless (eq payment.purchase.file.vimeo_state "
+                    done")}} have-file{{else}} have-not-file{{/unless}}{{else}} have-not-file{{/if}}{{#if
+                    payment.purchase.message}} have-message{{else}} have-not-message{{/if}}">
+                    {{!-- 파일 업로드 된 것이 있다면 .. --}}
+
+                    {{#if payment.purchase.file}}
+                    {{#if payment.purchase.file.is_mp4}}
+                    {{#if (eq payment.purchase.file.vimeo_state "ready")}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 업로드 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq payment.purchase.file.vimeo_state "uploading")}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 업로드 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq payment.purchase.file.vimeo_state "renew")}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 새롭게 업로드 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq payment.purchase.file.vimeo_state "done")}}
+                    {{#if payment.purchase.file.vimeo_files}}
+                    {{#if payment.purchase.file.vimeo_files.hls}}
+
+                    {{else}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 컨버팅 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+                    {{else}}
+                    <div class="bluedot-product-video-message">
+                        동영상을 컨버팅 중입니다.<br />
+                        완료되는대로 재생하실 수 있도록 하겠습니다.
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                    {{else}}
+                    {{#if payment.purchase.file.name}}
+
+                    {{/if}}
+                    {{/if}}
+                    {{/if}}
+                    {{#if payment.purchase.message}}
+                    <div class="bluedot-product-buyer-message bluedot-markdown">
+                        {{markdown payment.purchase.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{else}}
+
+                    {{#if payment.purchase.message}}
+                    <div class="bluedot-product-buyer-message__wrap">
+                      <div class="bluedot-product-buyer-message bluedot-markdown paid-false">
+                          {{markdown payment.purchase.message}}
+                      </div>
+                    </div>
+                    {{/if}}
+
+                {{#if payment_status.is_expired}}
+                {{!-- NTODO : 기한만료된 상태 보이기 --}}
+                {{!-- <div class="bluedot-product-expired">
+                    구매했던 상품의 기한이 만료되었습니다.
+                </div> --}}
+                {{/if}}
+
+                {{/if}}
+
+                {{#if payment_status.is_paid}}
+                <div class="bluedot-product-buttons">
+                    {{#if payment.type}}
+                    {{#if payment.purchase.url}}
+                    {{#if payment.purchase.url_is_text}}
+                    {{!-- URL 부분에 URL 입력하지 않고 일반 텍스트로 입력함 --}}
+                    <div class="bluedot-product-buyer-message bluedot-markdown">{{markdown payment.purchase.url}}</div>
+                    {{else}}
+                    <a class="gh-button gh-button-view gh-button-{{payment.type}}"
+                        href="{{payment.purchase.url}}">{{payment.purchase.button_text}}</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy disabled" href="#">구매완료</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy disabled" href="#">구매완료</a>
+                    {{/if}}
+                </div>
+                {{else}}
+                <div class="bluedot-product-price-wrap">
+                    {{#if payment.have_price_sale}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            {{#if payment.have_price_original}}
+                            무료회원 할인가
+                            {{else}}
+                            무료 회원가
+                            {{/if}}
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{#if @member.paid}}
+                            <i>{{price payment.price emptyText="구매 불가" currency="KRW"}}</i>
+                            {{else}}
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-price-for-subscriber">
+                        <div class="bluedot-product-price-label">
+                            유료 회원가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price_sale currency="KRW"}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-final-price">
+
+                        <div class="bluedot-product-price-label">
+                            결제금액
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{#if @member.paid}}
+                            {{price payment.price_sale emptyText="구매 불가" currency="KRW"}}
+                            {{else}}
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{else}}
+                    {{#unless payment.is_stop_selling}}
+                    {{#if payment.have_price_original}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            판매가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            <i>{{price payment.price_original emptyText="구매 불가" currency="KRW"}}</i>
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            무료회원 할인가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            <span class="bluedot-product-price-percent">{{payment.price_original_sale_percent}}<span
+                                    class="symbol">%</span></span>
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-final-price">
+                        <div class="bluedot-product-price-label">
+                            결제금액
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            판매가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/unless}}
+                    {{/if}}
+                </div>
+
+                <div class="bluedot-product-buttons">
+                    {{#if payment.is_selling}}
+                    {{#if (eq payment.type "webinar")}}
+                    {{#if payment.price_final}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">결제하기</a>
+                    {{else}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">등록하기</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">결제하기</a>
+                    {{/if}}
+                    {{else}}
+                    {{#if payment.is_stop_selling}}
+                    <a class="gh-button gh-button-buy disabled" href="#">판매 종료</a>
+                    {{/if}}
+
+                    {{#if payment.is_soldout}}
+                    <a class="gh-button gh-button-buy disabled" href="#">품절</a>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="bluedot-product-detail">
+            <div class="bluedot-product-content-wrap">
+                {{#if payment.have_require_message}}
+                <div class="bluedot-product-require-message bluedot-markdown">
+                    {{markdown payment.require_message}}
+                </div>
+                {{/if}}
+
+                {{#if payment_status.is_paid}}
+                {{#unless payment.purchase.chapters}}
+                {{#if payment.purchase.file}}
+                {{#if payment.purchase.file.is_mp4}}
+                {{#if (eq payment.purchase.file.vimeo_state "done")}}
+                {{#if payment.purchase.file.vimeo_files}}
+                {{#if payment.purchase.file.vimeo_files.hls}}
+                <div class="bluedot-product-video-wrap">
+                    <video-js id="video" class="vjs-default-skin vjs-big-play-centered" controls preload="auto"
+                        width="640" height="268">
+                        <source src="{{payment.purchase.file.vimeo_files.hls.link}}" type="application/x-mpegURL">
+                    </video-js>
+                    <script>
+                        var player = videojs('video');
+                    </script>
+                </div>
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/unless}}
+                {{/if}}
+
+                <div class="bluedot-product-content ">
+                    <div class="c-content">
+                        {{ content }}
+                    </div>
+                </div>
+            </div>
+            <div class="bluedot-product-modal-info">
+                <div class="bluedot-product-modal-title">{{title}}</div>
+                <div class="bluedot-product-modal-date-info">
+                    {{#if payment.used_period_days}}
+                    <div class="bluedot-product-modal-field">{{payment.period_days_title}}</div>
+                    <div class="bluedot-product-modal-date">{{payment.period_days}}일</div>
+                    {{/if}}
+                </div>
+                {{#if payment_status.is_paid}}
+                <div class="bluedot-product-buttons">
+                    {{#if payment.type}}
+                    {{#if payment.purchase.url}}
+                    {{#if payment.purchase.url_is_text}}
+                    {{!-- URL 부분에 URL 입력하지 않고 일반 텍스트로 입력함 --}}
+                    <div class="bluedot-product-buyer-message bluedot-markdown">{{markdown payment.purchase.url}}</div>
+                    {{else}}
+                    <a class="gh-button gh-button-view gh-button-{{payment.type}}"
+                        href="{{payment.purchase.url}}">{{payment.purchase.button_text}}</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy disabled" href="#">구매완료</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy disabled" href="#">구매완료</a>
+                    {{/if}}
+                </div>
+                {{else}}
+                <div class="bluedot-product-price-wrap">
+                    {{#if payment.have_price_sale}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            {{#if payment.have_price_original}}
+                            무료회원 할인가
+                            {{else}}
+                            무료 회원가
+                            {{/if}}
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{#if @member.paid}}
+                            <i>{{price payment.price emptyText="구매 불가" currency="KRW"}}</i>
+                            {{else}}
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-price-for-subscriber">
+                        <div class="bluedot-product-price-label">
+                            유료 회원가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price_sale currency="KRW"}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-modal-final-price">
+                        <div class="bluedot-product-price-label">
+                            결제금액
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{#if @member.paid}}
+                            {{price payment.price_sale emptyText="구매 불가" currency="KRW"}}
+                            {{else}}
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{else}}
+                    {{#unless payment.is_stop_selling}}
+                    {{#if payment.have_price_original}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            판매가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            <i>{{price payment.price_original emptyText="구매 불가" currency="KRW"}}</i>
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            무료회원 할인가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            <span class="bluedot-product-price-percent">{{payment.price_original_sale_percent}}<span
+                                    class="symbol">%</span></span>
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    <div class="bluedot-product-price bluedot-product-final-price">
+                        <div class="bluedot-product-price-label">
+                            결제금액
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="bluedot-product-price">
+                        <div class="bluedot-product-price-label">
+                            판매가
+                        </div>
+                        <div class="bluedot-product-price-value">
+                            {{price payment.price emptyText="구매 불가" currency="KRW"}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    {{/unless}}
+                    {{/if}}
+                </div>
+
+                <div class="bluedot-product-modal-buttons">
+                    {{#if payment.is_selling}}
+                    {{#if (eq payment.type "webinar")}}
+                    {{#if payment.price_final}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">결제하기</a>
+                    {{else}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">등록하기</a>
+                    {{/if}}
+                    {{else}}
+                    <a class="gh-button gh-button-buy" href="#" data-portal="product"
+                        data-product-uuid="{{ uuid }}">결제하기</a>
+                    {{/if}}
+                    {{else}}
+                    {{#if payment.is_stop_selling}}
+                    <a class="gh-button gh-button-buy disabled" href="#">판매 종료</a>
+                    {{/if}}
+
+                    {{#if payment.is_soldout}}
+                    <a class="gh-button gh-button-buy disabled" href="#">품절</a>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/product}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#if product.payment.is_online_class}}
+  {{#if product.payment_status.is_paid}}
+<style>
+.bluedot-product-header {
+  display: none !important;
+}
+</style>
+  {{/if}}
+{{/if}}
