@@ -1,0 +1,27 @@
+routes:
+  /membership/: members/membership
+  /signup/: members/signup
+  /signin/: members/signin
+  /account/: members/account
+
+  /blog/:
+    controller: channel
+    template: blog
+    filter: tag:-home
+
+  /shop/online-class/: shop/online-class
+  /shop/webinar/: shop/webinar
+  /shop/digital-book/: shop/digital-book
+  /shop/etc/: shop/etc
+
+  /product/tag/knowledge-room/: routes/product/tag/knowledge-room
+  /product/tag/connect-room/: routes/product/tag/connect-room
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: home
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

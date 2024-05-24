@@ -1,0 +1,492 @@
+/*------------------------------------*\
+  Elements > Lists
+\*------------------------------------*/
+
+ dd, ol, ul {
+  margin-left: $space-16;
+}
+
+.s-products-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 36px 10px;
+  width: 92%;
+  &__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+  @include mq($from: desktop) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 52px 46px;
+  }
+
+  @include mq($until: desktop) {
+    width: 100%;
+    // grid-template-columns: repeat(4, 1fr);
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 20vh;
+  }
+}
+
+/**
+ * ====================
+ * Product Card
+ * ====================
+ */
+
+ /* Container */
+ .s-product-card-pc {
+  @include mq($until: desktop) {
+    display: none;
+  }
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.1));
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: 340px;
+}
+
+/* Util */
+.s-product-card-pc {
+  &__link {
+    &--cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
+/* Media Part */
+.s-product-card-pc {
+  &__media {
+    position: relative;
+    background-color: #d9d9d9;
+    aspect-ratio: 1.61;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  &__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Main Part */
+.s-product-card-pc {
+  &__main {
+    flex-grow: 1;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+
+    @include mq($from: landscape) {
+      padding: 16px 20px 20px 20px;
+    }
+  }
+
+  &__tag {
+    width: fit-content;
+    background-color: #e9e9e9;
+    border-radius: 4px;
+    padding: 1px 10px;
+    margin-bottom: 5px;
+  }
+  
+  &__chip {
+    font-size: 12px;
+    line-height: 16.37px;
+    color: #979797;
+    font-weight: 700;
+    font-family : Pretendard, sans-serif;
+  }
+
+  &__date {
+    display: none;
+
+    @include mq($from: landscape) {
+      display: block;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+
+    &--label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 15px;
+      letter-spacing: -0.02em;
+
+      border-radius: 100rem;
+      padding: 4px 12px;
+      color: #fff;
+      background-color: #333;
+      border: 1px solid rgba(185, 185, 185, 0.5);
+    }
+  }
+
+  &__title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -1px;
+    flex-grow: 1;
+    margin-bottom: 8px;
+
+    @include ellipsis(2);
+
+    @include mq($from: landscape) {
+      font-size: 18px;
+      line-height: 25px;
+      margin-bottom: 12px;
+    }
+  }
+
+  &__prices {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+
+    @include mq($from: landscape) {
+      column-gap: 20px;
+    }
+
+    &:not(:last-child) {
+      color: #b9b9b9;
+    }
+
+    &:last-child {
+      color: #000;
+    }
+
+    &--label {
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.4;
+      max-width: 65px;
+
+      @include ellipsis(1);
+
+      @include mq($from: landscape) {
+        font-size: 12px;
+        max-width: 78px;
+      }
+    }
+
+    &--number {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.4;
+      flex-shrink: 0;
+
+      @include mq($from: landscape) {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+[data-user-color-scheme="dark"] {
+  .s-product-card-pc {
+    &__media {
+      background-color: #999;
+    }
+
+    &__main {
+      background-color: #4a4a4a;
+    }
+
+    &__title {
+      color: #fff;
+    }
+
+    &__price {
+      &:last-child {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.s-product-card-mobile {
+  display: flex;
+  border-bottom: 1px solid #E9E9EE;
+  @include mq($from: desktop) {
+    display: none;
+  }
+  &__url {
+    &--cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  &__media {
+    aspect-ratio: 4 / 3;
+    width: 40%;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+    background-color: rgba(0,0,0,.5);
+    @include mq($until: desktop) {
+      aspect-ratio: 2 / 1;
+      border-radius: 8px;
+    }
+  }
+
+  &__image {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+    &--wrap {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__main {
+    width: 70%;
+    padding: 0 6%;
+  }
+  &__tag {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16.37px;
+    color: #979797;
+    &--link {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 16.37px;
+      color: #979797;
+    }
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: -1px;
+    margin-top: 5%;
+    @include ellipsis(2);
+  }
+}
+
+ /* Container */
+ .s-product-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Util */
+.s-product-card {
+  &__link {
+    &--cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+}
+
+/* Media Part */
+.s-product-card {
+  &__media {
+    position: relative;
+    background-color: #d9d9d9;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  &__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Main Part */
+.s-product-card {
+  &__main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  &__tag {
+    width: fit-content;
+    margin-bottom: 3px;
+  }
+  
+  &__chip {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 13px;
+    letter-spacing: -1px;
+    color: #B4B3B3;
+  }
+
+  &__date {
+    display: none;
+
+    @include mq($from: landscape) {
+      display: block;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+
+    &--label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 15px;
+      letter-spacing: -0.02em;
+
+      border-radius: 100rem;
+      padding: 4px 12px;
+      color: #fff;
+      background-color: #333;
+      border: 1px solid rgba(185, 185, 185, 0.5);
+    }
+  }
+
+  &__title {
+    font-family: Noto Sans KR;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: -1px;
+
+    @include ellipsis(2);
+
+    @include mq($from: landscape) {
+      font-size: 18px;
+      line-height: 25px;
+    }
+  }
+
+  &__excerpt {
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #333335;
+    @include ellipsis(2);
+  }
+
+  &__detail {
+    margin-top: 5px;
+    display: flex;
+    column-gap: 4%;
+    &--date {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 13px;
+      letter-spacing: -1px;
+      color: #B9B9B9;
+    }
+    &--author {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 13px;
+      color: #8C8C82;
+    }
+    &--by {
+      font-family: Georgia;
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 600;
+      line-height: 13px;
+      color: #8C8C82;
+    }
+  }
+
+  &__prices {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+
+    @include mq($from: landscape) {
+      column-gap: 20px;
+    }
+
+    &:not(:last-child) {
+      color: #b9b9b9;
+    }
+
+    &:last-child {
+      color: #000;
+    }
+
+    &--label {
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.4;
+      max-width: 65px;
+
+      @include ellipsis(1);
+
+      @include mq($from: landscape) {
+        font-size: 12px;
+        max-width: 78px;
+      }
+    }
+
+    &--number {
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1.4;
+      flex-shrink: 0;
+
+      @include mq($from: landscape) {
+        font-size: 15px;
+      }
+    }
+  }
+}

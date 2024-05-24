@@ -1,0 +1,399 @@
+/*------------------------------------*\
+  Components > Site Navigation
+\*------------------------------------*/
+
+.c-nav-wrap {
+  @include mq($until: desktop) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100vh;
+    padding-top: $space-72;
+    background-color: var(--background-secondary);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(.96);
+
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      transition: all half($global-transition) cubic-bezier(.694, 0, .335, 1);
+    }
+  }
+
+  @include mq($from: desktop) {
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.c-nav {
+  @include mq($until: desktop) {
+    width: 100%;
+    padding-left: $space-32;
+    padding-right: $space-32;
+  }
+
+  @include mq($from: desktop) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__item {
+    line-height: 0;
+
+    &:not(:last-child) {
+      @include mq($from: desktop) {
+        margin-right: $space-36;
+      }
+    }
+
+    @include mq($until: desktop) {
+      margin-bottom: $space-16;
+    }
+
+    &.c-nav__item--only-desktop {
+      display: none;
+      @include mq($from: desktop) {
+        display: list-item;
+      }
+    }
+
+    &.c-nav__item--only-mobile {
+
+      @include mq($from: desktop) {
+        display: none;
+      }
+    }
+
+    &.is-membership .js-nav__link-membership path {
+      fill: #fff;
+    }
+  }
+
+  &__item--social {
+    @include mq($until: desktop) {
+      display: inline-block;
+    }
+
+    &:not(:last-child) {
+      @include mq($from: desktop) {
+        margin-right: $space-8;
+      }
+    }
+  }
+
+  &__item__icon {
+    display: flex;
+    width: $space-32;
+    height: $space-32;
+    fill: var(--color-text-primary);
+
+    @include mq($from: desktop) {
+      position: relative;
+
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-color: transparent;
+      }
+    }
+
+    @include attention() {
+      &:after {
+        background-color: var(--color-text-primary);
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    font-size: $type-md;
+    line-height: $type-md-lh;
+    font-weight: $type-700;
+    white-space: nowrap;
+    color: #000;
+
+    @include mq($until: desktop) {
+      line-height: $type-sm-lh;
+    }
+
+    @include mq($from: desktop) {
+    }
+
+    &--current {
+      &:after {
+        background-color: var(--color-text-primary);
+      }
+
+      .home-template & {
+        &:after {
+          background-color: transparent;
+        }
+      }
+    }
+
+    &--sign {
+      color: #000;
+    }
+
+    &--member {
+      display: flex;
+      min-width: 260px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border: 1px solid #000;
+      border-radius: 100rem;
+      font-size: 12px;
+      color: #000;
+
+      transition: all ease 0.2s;
+
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        color: #000;
+      }
+
+      @include mq($from:desktop) {
+        min-width: 0;
+        height: 32px;
+
+        @include attention() {
+          border-color: #fff;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+.c-nav-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 10;
+  height: $space-16;
+  width: $space-24;
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  @include mq($from: desktop) {
+    display: none;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: $space-24;
+    // background: var(--color-text-primary);
+    background-color: #fff;
+    cursor: pointer;
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      height: 100%;
+      background-color: inherit;
+    }
+
+    &:before { transform: translateY(16px) }
+    &:after { transform: translateY(7px); }
+
+    .c-nav-toggle--close & {
+      height: 2px;
+      background-color: transparent;
+
+      &:before,
+      &:after {
+        position: relative;
+        visibility: visible;
+        background: var(--color-text-primary);
+      }
+
+      &:before {
+        top: 9px;
+        transform: rotate(-45deg);
+      }
+
+      &:after {
+        top: 7px;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+body.e-mode-mobile {
+  .c-header {
+    .c-nav.o-plain-list {
+      overflow-y: auto;
+    }
+  }
+}
+
+#c-search {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+
+  .c-search {
+    &__stx {
+      border: none;
+      background-color: transparent;
+    }
+
+    &__submit {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 32px;
+      height: 32px;
+      padding-right: 16px;
+    }
+  }
+}
+
+.c-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px 16px;
+  flex-wrap: wrap;
+
+  @include mq($from: desktop) {
+    gap: 12px 28px;
+  }
+
+  &__item {
+    color: var(--color-gray-600);
+    font-weight: $type-700;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    font-weight: 500 !important;
+  }
+}
+.s-products-navigation {
+  &__container {
+    margin: 0 auto;
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  &__item {
+    cursor: pointer;
+  }
+  /* Chrome, Safari, Opera를 위한 스크롤바 숨기기 */
+&__list::-webkit-scrollbar {
+  display: none;
+}
+
+/* IE, Edge, Firefox를 위한 스크롤바 숨기기 */
+&__list {
+  -ms-overflow-style: none; /* IE와 Edge */
+  scrollbar-width: none; /* Firefox */
+}
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    overflow-x: scroll;
+    text-align: center;
+
+    white-space:nowrap;
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 20px;
+      margin-bottom: 25px;
+    }
+    li:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__link {
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    height: 40px;
+    min-width: 96px;
+    padding: 0 16px;
+    border-radius: 100rem;
+    color: #8C8C82 !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+
+    @include mq($from: desktop) {
+      height: 50px;
+      min-width: 116px;
+    }
+
+    &--current {
+      color: #fff !important;
+      background-color: #000 !important;
+    }
+  }
+}
+
+// .s-products-navigation {
+//   list-style: none !important;
+//   display: flex !important;
+//   column-gap: 1% !important;
+//   width: 100% !important;
+//   @include mq($until: desktop) {
+//     width: 90% !important;
+//     margin: 0;
+//   }
+//   justify-content: center !important;
+//   overflow: scroll !important;
+//   &__link {
+//     color: #8C8C82;
+//     background-color: transparent !important;
+//     &--current {
+//       color: #fff !important;
+//       background-color: #000 !important;
+//     }
+//   }
+//   &__item {
+//     width: fit-content !important;
+//   }
+// }

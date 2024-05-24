@@ -1,0 +1,64 @@
+{
+  "name": "y-street",
+  "description": "와이스트릿 테마",
+  "version": "0.0.1",
+  "engines": {
+    "ghost": ">=4.0.0"
+  },
+  "keywords": [
+    "ghost-theme"
+  ],
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "devDependencies": {
+    "dart-sass": "^1.25.0",
+    "gulp": "^4.0.2",
+    "gulp-rtlcss": "^1.4.2",
+    "gulp-sass": "^5.0.0",
+    "gulp-zip": "^4.2.0",
+    "node-sass": "^6.0.1",
+    "sass": "^1.35.1",
+    "@primer/css": "^15.2.0",
+    "clipboard": "^2.0.8",
+    "concat": "^3.0.0",
+    "evil-icons": "^1.10.1",
+    "fs": "0.0.2",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^0.6.1",
+    "gulp-size": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.12.0",
+    "jshint-stylish": "^2.2.0",
+    "lazysizes": "^5.3.2",
+    "normalize.css": "^8.0.1",
+    "prismjs": "^1.23.0",
+    "run-sequence": "^2.2.1",
+    "sass-mq": "^5.0.1"
+  },
+  "author": {
+    "name": "Mediasphere",
+    "email": "admin@mediasphere.kr",
+    "url": "https://mediasphere.kr/"
+  },
+  "config": {
+    "custom": {
+      "tags_for_home_post_section": {
+        "group": "homepage",
+        "type": "text",
+        "title": "홈 글 섹션 태그 목록",
+        "description": "노출 시킬 태그의 슬러그(slug)를 따옴표(,)로 구분하여 입력하세요. 따옴표와 다음 글자 사이에 공백이 없도록 유의해주세요."
+      }
+    },
+    "posts_per_page": 12,
+    "image_sizes": {
+
+    }
+  }
+}

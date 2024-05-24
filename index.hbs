@@ -1,0 +1,25 @@
+{{!< default}}
+
+{{#contentFor 'title'}}{{t 'Blog' }}{{/contentFor}}
+
+<div class="o-grid">
+  <div class="o-grid__col">
+    <div class='c-archive'>
+      <h1 class='c-archive__title'>최신 인기 콘텐츠</h1>
+    </div>
+  </div>
+</div>
+
+<div class="o-grid">
+  <div class="o-grid__col">
+    <div class="c-archive-grid__outer">
+      {{> loop }}
+    </div>
+  </div>
+</div>
+
+<div class="o-grid">
+  <div class="o-grid__col">
+  {{ pagination }}
+  </div>
+</div>

@@ -1,0 +1,191 @@
+{{!< default}} {{#contentFor 'title' }}{{ meta_title }}{{/contentFor}} {{!-- Post tag section --}} <div
+  class="c-home__desktop">
+  <div class="swiper-container swiper-banner c-home-top-banner">
+    <div class="swiper-wrapper">
+      {{#get "posts" limit="5" filter="featured:true" include="authors,tags" order="published_at desc" as |items|}}
+      {{#if items}}
+      {{#foreach posts}}
+      <div class="swiper-slide">
+        <a href="{{url}}">
+          <div class="c-post-card__image--wrap">
+            {{#if feature_image}}
+            <img class="c-post-card__image"
+              alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}"
+              src="{{img_url feature_image}}" />
+            {{/if}}
+          </div>
+        </a>
+      </div>
+      {{/foreach}}
+      {{/if}}
+      {{/get}}
+    </div>
+    <div class="swiper-page"></div>
+    <div class="swiper-button-prev swiper-banner-btn swiper-banner-btn-prev"><svg width="26" height="26"
+        viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.3555 21.8572L8.07146 12.5717L17.3572 3.28575" stroke="#999999" stroke-width="2" />
+      </svg>
+    </div>
+    <div class="swiper-button-next swiper-banner-btn swiper-banner-btn-next"><svg width="26" height="26"
+        viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.64449 3.85718L17.9285 13.1427L8.64282 22.4286" stroke="#999999" stroke-width="2" />
+      </svg>
+    </div>
+  </div>
+
+  {{#if @custom.tags_for_home_post_section}}
+  {{#get "tags" filter="slug:[{{@custom.tags_for_home_post_section}}]" include="count.posts" }}
+  {{#if tags}}
+  {{#foreach tags}}
+  {{#if @first}}
+  <div class="c-home-divider">
+    <div class="o-grid" style="padding: 0 !important; max-width: 1200px !important;">
+      <div class="o-grid__col" style="padding: 0 !important;">
+        <hr class="c-home-divider__inner">
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  <div class="c-home-section">
+    <div class="o-grid" style="padding: 0 !important; max-width: 1200px !important; display: block !important;">
+      <div class="o-grid__col" style="padding: 0 !important;">
+        <div class="c-home-section__header">
+          <div class="c-home-section__title">{{name}}</div>
+          <div class="c-home-section__action" style="position: relative">
+            <a href="{{url}}">전체보기</a>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+            <div class="swiper2-button-prev-{{@index}} swiper2-btn swiper2-btn--prev"><svg width="26" height="26" viewBox="0 0 26 26"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.3555 21.8572L8.07146 12.5717L17.3572 3.28575" stroke="#999999" stroke-width="2" />
+            </svg>
+          </div>
+          <div class="swiper2-button-next-{{@index}} swiper2-btn swiper2-btn--next"><svg width="26" height="26" viewBox="0 0 26 26"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.64449 3.85718L17.9285 13.1427L8.64282 22.4286" stroke="#999999" stroke-width="2" />
+            </svg>
+          </div>
+          </div>
+        </div>
+        <div class="c-home-section__main" style="position: relative; overflow: hidden;">
+          {{#get "posts" filter="tag:{{slug}}" include="tags,authors" order="published_at desc" as |posts|}}
+          {{#if posts}}
+          <div class="swiper-container c-archive-grid c-home-section__main swiper2-{{@index}}">
+            <div class="swiper-wrapper">
+              {{#foreach posts}}
+              <div class="swiper-slide">
+                {{> post-card }}
+              </div>
+              {{/foreach}}
+            </div>
+          </div>
+          {{/if}}
+          {{/get}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="c-home-divider">
+    <div class="o-grid" style="padding: 0 !important; max-width: 1200px !important;">
+      <div class="o-grid__col" style="padding: 0 !important;">
+        <hr class="c-home-divider__inner">
+      </div>
+    </div>
+  </div>
+  {{/foreach}}
+  {{/if}}
+  {{/get}}
+  {{/if}}
+  {{> subscribe-box }}
+  </div>
+
+  {{!-- [Home Mobile Version] --}}
+  <div class="c-home__mobile">
+    <div class="swiper-container swiper-banner c-home-top-banner">
+      <div class="swiper-wrapper">
+        {{#get "posts" limit="5" filter="featured:true" include="authors,tags" order="published_at desc" as |items|}}
+        {{#if items}}
+        {{#foreach posts}}
+        <div class="swiper-slide" style="background-color: #d9d9d9">
+          <a href="{{url}}">
+            {{#if feature_image}}
+            <div class="c-post-card__image--wrap">
+              <img class="c-post-card__image"
+                alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}"
+                src="{{img_url feature_image}}" />
+            </div>
+            {{/if}}
+          </a>
+        </div>
+        {{/foreach}}
+        {{/if}}
+        {{/get}}
+      </div>
+      <div class="swiper-page"></div>
+      <div class="swiper-button-prev swiper-banner-btn swiper-banner-btn-prev"><svg width="26" height="26"
+          viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.3555 21.8572L8.07146 12.5717L17.3572 3.28575" stroke="#999999" stroke-width="2" />
+        </svg>
+      </div>
+      <div class="swiper-button-next swiper-banner-btn swiper-banner-btn-next"><svg width="26" height="26"
+          viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8.64449 3.85718L17.9285 13.1427L8.64282 22.4286" stroke="#999999" stroke-width="2" />
+        </svg>
+      </div>
+    </div>
+    {{#if @custom.tags_for_home_post_section}}
+    {{#get "tags" filter="slug:[{{@custom.tags_for_home_post_section}}]" include="count.posts" }}
+    {{#if tags}}
+    {{#foreach tags}}
+    <div class="c-home-divider">
+      <div class="o-grid">
+        <div class="o-grid__col">
+          <hr class="c-home-divider__inner">
+        </div>
+      </div>
+    </div>
+    <div class="c-home-section__header">
+      <a href="{{url}}">
+        <div class="c-home-section__title">{{name}}</div>
+      </a>
+      <div class="c-home-section__action">
+        <div class="all-btn">
+          <a href="{{url}}">전체보기</a>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </div>
+        <div class="swiper-button-prev-{{@index}} swiper-btn"><svg width="26" height="26" viewBox="0 0 26 26"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.3555 21.8572L8.07146 12.5717L17.3572 3.28575" stroke="#999999" stroke-width="2" />
+          </svg>
+        </div>
+        <div class="swiper-button-next-{{@index}} swiper-btn"><svg width="26" height="26" viewBox="0 0 26 26"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.64449 3.85718L17.9285 13.1427L8.64282 22.4286" stroke="#999999" stroke-width="2" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    {{#get "posts" filter="tag:{{slug}}" include="tags,authors" order="published_at desc" as |posts|}}
+    {{#if posts}}
+    <div class="swiper-container swiper-{{@index}}">
+      <div class="swiper-wrapper">
+        {{#foreach posts}}
+        <div class="swiper-slide">
+          {{> post-card type="swiper"}}
+        </div>
+        {{/foreach}}
+      </div>
+    </div>
+    {{/if}}
+    {{/get}}
+    {{/foreach}}
+    {{/if}}
+    {{/get}}
+    {{/if}}
+    {{> subscribe-box }}
+  </div>

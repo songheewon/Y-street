@@ -1,0 +1,15 @@
+
+.t-v__only--mobile {
+  @include mq($from: desktop) {
+    display: none !important;
+  }
+}
+
+.t-v__only--desktop {
+  display: none !important;
+
+  @include mq($from: desktop) {
+    display: inherit !important;
+  }
+}
+

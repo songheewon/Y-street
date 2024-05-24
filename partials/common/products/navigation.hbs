@@ -1,0 +1,13 @@
+<div class="s-products-navigation__container">
+  <div class="s-products-navigation">
+    <div style="display:none !important;">{{product_categories}}</div>
+    <ul class="s-products-navigation__list">
+      <li class="s-products-navigation__item s-products-navigation__item--all">
+        <a href="{{@site.url}}/shop/" class="s-products-navigation__link{{#match which "home"}} s-products-navigation__link--current{{/match}} {{link_class for="/shop/" activeClass="s-products-navigation__link--current"}}">{{t '전체보기'}}</a>
+      </li>
+      {{#foreach product_categories}}
+      <li class="s-products-navigation__item s-products-navigation__item--{{slug}}">{{#link href=(url) class="s-products-navigation__link" activeClass="s-products-navigation__link--current"}}{{label}}{{/link}}</li>
+      {{/foreach}}
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+/*------------------------------------*\
+  Components > Tags
+\*------------------------------------*/
+/* 드롭다운 버튼 스타일 */
+.dropbtn {
+  border: none;
+  align-items: center;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: #999999;
+    cursor: pointer;
+    height: 50px;
+}
+
+/* 드롭다운 컨테이너 스타일 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: #999999;
+  text-align: center;
+}
+.c-secondary-nav {
+  color: #999999 !important;
+}
+.c-secondary-nav:hover {
+  color: #000 !important;
+}
+
+/* 드롭다운 내용 (기본적으로 숨겨져 있음) */
+.dropdown-content {
+  width: 10%;
+  display: none;
+  position: absolute;
+  background-color: #2C3E50;
+  color: #F1C40F;
+  min-width: 160px;
+  @include mq($until: desktop) {
+    left: -100%;
+    top: 30px;
+  }
+  left: -100%;
+  top: 35px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 드롭다운 링크 스타일 */
+.dropdown-content a {
+  color: #F1C40F;
+  padding: 5px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+/* 드롭다운 링크에 hover 시 배경색 변경 */
+.dropdown-content a:hover {
+  opacity: 0.3;
+}
+
+/* hover 시 드롭다운 메뉴 표시 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:focus .dropdown-content {
+  display: block;
+}
+
+/* 드롭다운 내용이 표시될 때 드롭다운 버튼의 배경색 변경 */
+.dropdown:hover .dropbtn {
+  color: #000;
+}
+
+.c-tags {
+  overflow: hidden;
+  margin-bottom: - $space-8;
+
+  @include mq($from: tablet) {
+    margin-bottom: - $space-16;
+  }
+
+  a {
+    float: left;
+    font-size: $type-xs;
+    line-height: $type-xs-lh;
+    font-weight: $type-500;
+    letter-spacing: $global-letter-spacing;
+    padding: $space-8 $space-16;
+    margin-right: $space-8;
+    margin-bottom: $space-8;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: $space-4;
+
+    @include attention() {
+      color: var(--color-brand);
+    }
+
+    @include mq($from: tablet) {
+      padding: $space-8 $space-24;
+      margin-right: $space-16;
+      margin-bottom: $space-16;
+      line-height: $type-md-lh;
+    }
+  }
+}

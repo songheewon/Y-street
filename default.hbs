@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="{{ @site.locale }}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{{ meta_title }}</title>
+
+  {{> fonts }}
+  {{> compiled/inline-css }}
+  <link rel="stylesheet" href="{{asset "public/bluedot.css" hasMinFile="true"}}"/>
+  {{> css/style }}
+
+  <script>
+    var site_url                            = '{{ @site.url }}',
+        pagination_next_page_number         = '{{ pagination.next }}',
+        pagination_available_pages_number   = '{{ pagination.pages }}',
+        pagination_loading_text             = '{{t "Loading" }}',
+        pagination_more_posts_text          = '{{t "More Contents" }}',
+        clipboard_copied_text               = '{{t "Link copied to clipboard" }}';
+
+    var bluedot_user_id = {{#if @member}}'{{@member.uuid}}'{{else}}null{{/if}};
+  </script>
+<link rel="stylesheet" href="https://storage.googleapis.com/cdn.media.bluedot.so/npm/swiper@9.2.4/swiper-bundle.min.css" integrity="sha256-7SqJW4yeYPoB9GX5fs+DzJLY6nyeEzRHlJsRK8pO35o=" crossorigin="anonymous">
+<script src="https://storage.googleapis.com/cdn.media.bluedot.so/npm/swiper@9.2.4/swiper-bundle.min.js" integrity="sha256-U9mO7IJRMO3E2Ac9p7qmTLdt9lQvuF/7rzl2xps5cak=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://storage.googleapis.com/cdn.media.bluedot.so/npm/swiper@9.2.4/swiper-bundle.min.css">
+<script src="https://storage.googleapis.com/cdn.media.bluedot.so/npm/swiper@9.2.4/swiper-bundle.min.js"></script>
+  {{ ghost_head }}
+</head>
+
+<body class="{{ body_class }}{{{block 'body_custom_class'}}}">
+
+  {{> header }}
+
+  <div class='c-site-container'>
+
+    <main id='main-content' class='o-wrapper'>
+      {{{ body }}}
+    </main>
+
+    <footer class="footer">
+      {{#if @site.use_footer}}
+      {{> footer}}
+      {{/if}}
+
+      <div class="c-bluedot-footer" style="background-color: #f4f4f4 !important">
+        <div class="o-grid">
+          <div class="o-grid__col o-grid__col--full">
+            {{ bluedot_footer }}
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src='{{ asset 'js/app.min.js' }}'></script>
+  {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
+  {{{block "scripts"}}}
+
+  {{ ghost_foot }}
+</body>
+</html>
+<style>
+  .bluedot-footer {
+    background-color: #f4f4f4;
+  }
+</style>

@@ -1,0 +1,183 @@
+/*------------------------------------*\
+  Components > Product Card
+\*------------------------------------*/
+
+.c-product-card {
+  display: flex;
+  flex-direction: column;
+
+  @include mq($from: desktop) {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.1));
+  }
+
+  &__url {
+    &--cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  &__media {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    overflow: hidden;
+
+    margin-bottom: 16px;
+    position: relative;
+    background-color: rgba(0,0,0,.5);
+  }
+
+  &__image {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+    &--wrap {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__chip {
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px;
+    border-radius: 5px;
+    background-color: #00ceff;
+    font-size: 10px;
+    font-weight: 700;
+
+    @include mq($from: desktop) {
+      display: none;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    @include mq($from: desktop) {
+      padding: 0 20px;
+    }
+  }
+
+  &__meta {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+
+    font-size: 12px;
+    line-height: 24px;
+
+    color: #8c8c82;
+
+    @include mq($from: desktop) {
+      justify-content: space-between;
+      margin-bottom: 6px;
+      flex-grow: 0;
+    }
+  }
+
+  &__tag {
+    flex-shrink: 0;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--accent-color);
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -1px;
+
+    margin-bottom: 9px;
+
+    @include ellipsis(2);
+
+    @include mq($from: desktop) {
+      margin-bottom: 16px;
+      min-height: 48px;
+    }
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+
+    font-size: 11px;
+    font-weight: 500;
+    color: #8c8c82;
+
+    @include mq($from: desktop) {
+      font-size: 14px;
+      justify-content: space-between;
+    }
+
+    &--list {
+      display: flex;
+      flex-direction: column;
+      row-gap: 6px;
+
+      @include mq($from: desktop) {
+        padding-bottom: 20px;
+        row-gap: 10px;
+      }
+    }
+
+    &--label {
+      font-weight: 700;
+      color: #000;
+      flex-basis: 98px;
+
+      @include mq($from: desktop) {
+        flex-basis: auto;
+      }
+    }
+  }
+}
+
+.c-product-card__type {
+  &--webinar {
+    .c-product-card__price--label {
+      flex-basis: 48px;
+    }
+
+    @include mq($from: desktop) {
+      .c-product-card__price {
+        justify-content: flex-start;
+        column-gap: 24px;
+      }
+
+      .c-product-card__price--label {
+        flex-basis: 56px;
+      }
+
+      .c-product-card__price--number {
+
+      }
+    }
+  }
+}

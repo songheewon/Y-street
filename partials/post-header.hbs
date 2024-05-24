@@ -1,0 +1,22 @@
+<header class='c-post-header' style="width: 100%; max-width: 730px; margin: 50px auto;">
+  <div class='c-post-header__title' style="width: 100%; {{#match @site.title_align "=" " left"}}text-align: left
+    !important;{{else match @site.title_align "=" "center" }}text-align: center !important;{{else match
+    @site.title_align "=" "right" }}text-align: right !important;{{else match @site.title_align "=" "justify"
+    }}text-align: justify !important;{{/match}}">{{ title }}</div>
+
+  {{#is 'post'}}
+  <div class='c-post-header__meta'>
+    {{#primary_author}}
+    {{#if profile_image}}
+    <div class='c-post-header__author_media'>
+      <img class='c-post-header__author_image lazyload' data-src='{{ img_url profile_image size=' profile-image-small'
+        }}' alt='{{ name }}' width='32' height='32'>
+    </div>
+    {{/if}}
+    <div class='c-post-header__author_info'>
+      <div class='c-post-header__author_name'>{{ name }}</div>{{/primary_author}}
+      <time class='c-post-header__date' datetime='{{ date format=' YYYY-MM-DD' }}'>{{ date format='YYYY-MM-DD' }}</time>
+    </div>
+  </div>
+  {{/is}}
+</header>

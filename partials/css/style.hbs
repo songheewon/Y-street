@@ -1,0 +1,84 @@
+<link rel="stylesheet" href="{{asset "public/bluedot.css" hasMinFile="true"}}"/>
+<style>
+:root {
+  {{#if @site.accent_color}}
+  --accent-color: {{ @site.accent_color }};
+  {{/if}}
+
+  {{#if @site.header_background_color}}
+  --color-header-background: {{@site.header_background_color}};
+  --color-home-hero-background: {{@site.header_background_color}};
+  {{/if}}
+}
+
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bg-accent {
+  background-color: var(--accent-color) !important;
+}
+
+.bluedot-product-wrap .bluedot-product-header .bluedot-product-cover img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.bluedot-product-video-wrap .video-js {
+  padding-top: 56.25%;
+}
+
+{{#if @site.title_align}}
+.post-template .c-post-header__title .c-post__title {
+  {{#match @site.title_align '=' 'left'}}
+  text-align: left;
+  {{else match @site.title_align '=' 'right'}}
+  text-align: right;
+  {{else match @site.title_align '=' 'center'}}
+  text-align: center;
+  {{else match @site.title_align '=' 'side'}}
+  text-align: justify;
+  {{/match}}
+}
+{{/if}}
+
+{{#if @site.main_align}}
+.post-template .c-content {
+  {{#match @site.main_align '=' 'left'}}
+  text-align: left;
+  {{else match @site.main_align '=' 'right'}}
+  text-align: right;
+  {{else match @site.main_align '=' 'center'}}
+  text-align: center;
+  {{else match @site.main_align '=' 'side'}}
+  text-align: justify;
+  {{/match}}
+}
+{{/if}}
+
+{{#if @site.title_font}}
+.post-template .c-post-header__title {
+  {{#match @site.title_font '=' 'noto_sans_kr'}}
+  font-family: "Noto Sans KR", sans-serif;
+  {{else match @site.title_font '=' 'nanum_gothic'}}
+  font-family: "Nanum Gothic", sans-serif;
+  {{/match}}
+}
+{{/if}}
+
+{{#if @site.main_font}}
+.post-template .c-content,
+.post-template .c-content *,
+.post-template .c-content > *,
+.post-template .c-content ul,
+.post-template .c-content li {
+  {{#match @site.main_font '=' 'noto_sans_kr'}}
+  font-family: "Noto Sans KR", sans-serif;
+  {{else match @site.main_font '=' 'nanum_gothic'}}
+  font-family: "Nanum Gothic", sans-serif;
+  {{/match}}
+}
+{{/if}}
+</style>

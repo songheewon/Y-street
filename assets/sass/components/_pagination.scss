@@ -1,0 +1,74 @@
+/*------------------------------------*\
+  Components > Pagination
+\*------------------------------------*/
+
+.c-pagination {
+  margin-bottom: $space-32;
+
+  @include mq($from: desktop) {
+    margin-bottom: $space-40;
+  }
+
+  &--count-0 {
+    display: none;
+  }
+}
+
+body.author-template .c-pagination {
+  margin-top: 32px;
+
+  @include mq($from: desktop) {
+    margin-top: 40px;
+  }
+}
+
+.s-products-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  text-align: center;
+  @include mq($until: desktop) {
+    margin: 0 auto;
+  }
+  &__wrap {
+    padding: 60px 0;
+  }
+
+  &__button {
+    text-align: center;
+    background-color: #fff;
+    min-width: 340px;
+    padding: 12px 50px;
+    border-radius: 27px;
+    border: 1px solid #979797;
+    color: #979797;
+    max-height: 54px;
+    min-height: 54px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 23.17px;
+    letter-spacing: -0.01em;
+    cursor: not-allowed;
+    opacity: 0.3;
+
+    &.active {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
+
+// Color
+.s-products-pagination {
+  &__button {
+    border-color: #999;
+    color: #999;
+
+    &.active {
+      @include attention() {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}

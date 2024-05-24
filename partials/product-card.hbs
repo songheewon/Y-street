@@ -1,0 +1,56 @@
+<div class="c-product-card js-post-card__wrap c-product-card__type--{{payment.type}}">
+
+  <div class="c-product-card__media">
+    <a href="{{ url }}" class="c-product-card__url--cover"></a>
+    {{#if feature_image}}
+    <div class="c-product-card__image--wrap">
+      <img
+        class="c-product-card__image"
+        alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}"
+        src="{{img_url feature_image}}"
+      />
+    </div>
+    {{/if}}
+    <div class="c-product-card__chip">{{payment.type_text}}</div>
+  </div>
+
+
+  <div class="c-product-card__main">
+
+    <div class="c-product-card__meta t-v__only--desktop">
+      <div class="c-product-card__tag">
+        {{#primary_tag}}
+        <div class="c-product-card__tag--name">{{name}}</div>
+        {{/primary_tag}}
+      </div>
+    </div>
+
+    <div class="c-product-card__content">
+      <h2 class="c-product-card__title">
+        <a href="{{ url }}" class="c-product-card__url">{{title}}</a>
+      </h2>
+    </div>
+
+    <div class="c-product-card__data">
+
+
+      {{!-- 가격 표시 --}}
+      <div class="c-product-card__price--list">
+        {{!-- 이벤트 날짜 --}}
+        {{#if payment.is_webinar}}
+          {{#if payment.event.used_event_date}}
+        <div class="c-product-card__price">
+          <div class="c-product-card__price--label">행사일정</div>
+          <div class="c-product-card__price--number">{{payment.event.event_date_text}}</div>
+        </div>
+          {{/if}}
+        {{/if}}
+
+
+        {{> product-card/price-info }}
+      </div>
+    </div>
+
+  </div>
+
+</div>

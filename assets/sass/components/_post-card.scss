@@ -1,0 +1,340 @@
+/*------------------------------------*\
+  Components > Post Card
+\*------------------------------------*/
+
+.c-loop {
+  grid-template-columns: repeat(2, 1fr) !important;
+  @include mq($until: desktop) {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+.c-post-card__tagtype {
+  background-color: #fff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+  padding: 20px !important;
+  border-radius: 16px;
+  &--main {
+    display: flex;
+    justify-content: space-between;
+    &--first {
+      width: 60%;
+    }
+    &--second {
+      width: 35%;
+      display: flex;
+      justify-content: end;
+    }
+  }
+  &--tag {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 13px;
+    letter-spacing: -1px;
+    color: #B4B3B3;
+  }
+  &--title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -1px;
+    margin-top: 15px;
+    @include ellipsis(2);
+  }
+  &--image {
+    &--wrap {
+      width: 150px;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background-color: grey;
+      border-radius: 13px;
+    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &--data {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    &--first {
+      display: flex;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: -1px;
+      color: #B4B3B3;
+      column-gap: 10px;
+    }
+    &--second {
+      display: flex;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 13px;
+      letter-spacing: -1px;
+      color: #B4B3B3;
+    }
+  }
+}
+
+.c-post-card {
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 455px;
+  &__mobile {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.1));
+
+    &--main {
+      background-color: #fff;
+      margin-top: -16px;
+      padding: 16px 10px;
+    }
+    &--title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 25px;
+      letter-spacing: -1px;
+      height: 50px;
+      @include ellipsis(2);
+    }
+    &--datas {
+      display: flex;
+      border-top: 0.5px solid rgba(225, 225, 225, 1);
+      margin-top: 10px;
+      padding-top: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 13px;
+      letter-spacing: -1px;
+      color: #B4B3B3;
+      justify-content: space-between;
+    }
+    &--data {
+      display: flex;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  @include mq($from: desktop) {
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .05);
+  }
+
+  &__url {
+    @include ellipsis(2);
+    width: 100%;
+    &--cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+  }
+
+  &__media {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    overflow: hidden;
+
+    margin-bottom: 16px;
+    position: relative;
+    background-color: rgba(0,0,0,.5);
+  }
+
+  &__image {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+    &--wrap {
+      aspect-ratio: 4 / 3;
+      width: 100%;
+      height: 100%;
+      background-color: #d9d9d9;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    @include mq($from: desktop) {
+      padding: 0 20px;
+    }
+  }
+
+  &__membership {
+    margin-bottom: 10px;
+    width: fit-content;
+
+    &--label {
+      font-size: 12px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1;
+      height: 24px;
+
+      padding: 0px 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 3px;
+      background-color: rgba(98, 194, 238, 0.3);
+      color: #57A8CE;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    &--paid {
+      background: rgba(99, 16, 164, 0.1);
+      color: rgba(99, 16, 164, 0.3);
+    }
+    &--members {
+      background-color: rgba(18, 176, 103, 0.2);
+      color: #12B067;
+      border: none;
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: -1px;
+    margin-bottom: 9px;
+    width: 100%;
+
+    @include ellipsis(2);
+
+    @include mq($from: desktop) {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__data {
+    display: flex;
+    align-items: center;
+
+    column-gap: 16px;
+
+    @include mq($from: desktop) {
+      border-top: 0.5px solid #d9d9d9;
+      padding: 16px 0;
+    }
+  }
+  &__datetime {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 13px;
+    letter-spacing: -1px;
+    color: #B4B3B3;
+  }
+  &__author {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    flex-shrink: 0;
+
+    &--profile {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 100%;
+      border: 1px solid #d9d9d9;
+      background-color: #d9d9d9;
+      width: 32px;
+      height: 32px;
+
+      &-image {
+        aspect-ratio: 1 / 1;
+
+        img {
+          display: block;
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    &--name {
+      font-size: 12px;
+      font-weight: 500;
+      color: #000;
+    }
+  }
+
+  &__meta {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+
+    font-size: 12px;
+    line-height: 24px;
+
+    color: #8c8c82;
+
+    @include mq($from: desktop) {
+      justify-content: space-between;
+    }
+  }
+
+  &__tag {
+    flex-shrink: 0;
+    &--name {
+      color: #B4B3B3;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 13px;
+      letter-spacing: -1px;
+    }
+  }
+  &__comment {
+    width: 16px;
+    height: 16px;
+    &--image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &--container {
+      display: flex;
+      color: #B4B3B3;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 13px;
+      letter-spacing: -1px;
+    }
+    &--count {
+      margin-left: 5px;
+    }
+  }
+}
+
+.bluedot-product-main-title {
+  @include ellipsis(2);
+}
+
+.bluedot-product-main-excerpt {
+  @include ellipsis(2);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.bluedot-product-excerpt {
+  @include ellipsis(4);
+}

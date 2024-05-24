@@ -1,0 +1,605 @@
+/*------------------------------------*\
+  Components > Subscribe Form
+\*------------------------------------*/
+
+.c-subscribe-etc {
+
+  border-top: 0.5px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+  padding: 40px 0;
+
+  @include mq($from: desktop) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__outer {
+    margin: 20px 0;
+
+    &--home {
+      border-top: 0.5px solid rgba(0, 0, 0, 0.3);
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+
+      @include mq($from: desktop) {
+        border: 0px;
+      }
+
+      .c-subscribe-etc {
+        @include mq($until: desktop) {
+          border: 0px;
+        }
+
+        @include mq($from: desktop) {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 56px 80px;
+
+          &__header {
+            margin-bottom: 0px;
+          }
+
+          .c-subscribe-etc__input {
+            width: 320px;
+            max-width: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    margin-bottom: 24px;
+  }
+
+  &__icon {
+    width: 42px;
+    height: 28px;
+
+    &--image {
+      display: block;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 32px;
+
+    @include mq($from: desktop) {
+      font-size: 20px;
+    }
+  }
+
+  &__form {
+    @include mq($from: desktop) {
+      display: flex;
+      align-items: center;
+      column-gap: 20px;
+    }
+  }
+
+  &__form &__input {
+    border-color: var(--accent-color);
+    border-radius: 5px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    margin-bottom: 16px;
+
+    @include mq($from: desktop) {
+      margin-bottom: 0;
+      max-width: 260px;
+    }
+  }
+
+  &__form &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--accent-color);
+    border: 0px;
+    color: #fff;
+    border-radius: 3px;
+    height: 46px;
+    padding: 0 16px;
+    min-width: 180px;
+    width: fit-content;
+    cursor: pointer;
+
+    position: relative;
+
+    @include attention() {
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        background-color: rgba(0,0,0,0.2);
+      }
+    }
+
+    @include mq($until: desktop) {
+      min-width: auto;
+    }
+  }
+}
+
+body.post-template .c-subscribe-etc__outer {
+  margin: 60px 0;
+}
+
+.c-subscribe {
+  position: relative;
+  overflow: hidden;
+  background-color: #F39C12;
+  color: #fff;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  margin: 50px auto;
+  width: 100%;
+  padding: 30px 20px;
+  @include mq($from: desktop) {
+    width: 600px;
+    padding: 30px 40px;
+  }
+
+  &__content {
+    position: relative;
+    max-width: 540px;
+    margin: auto;
+  }
+
+  &__heading {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  &__icon {
+    position: absolute;
+    top: -141px;
+    right: -121px;
+
+    svg {
+      fill: var(--background-primary);
+    }
+  }
+}
+
+.c-subscribe-form {
+  &__wrap {
+    padding-bottom: 40px;
+  }
+
+  .c-alert {
+    display: none;
+  }
+
+  .c-btn {
+    @extend .c-btn--loading;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  &.loading .c-btn {
+    &:after {
+      display: block;
+    }
+  }
+
+  &.success .c-alert--success,
+  &.invalid .c-alert--invalid,
+  &.error   .c-alert--error  {
+    display: block;
+  }
+
+  &__input {
+    min-width: 350px;
+  }
+}
+
+.c-form-group {
+  color: white;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+  }
+
+  @include mq($from: desktop) {
+    display: flex;
+  }
+
+  @include mq($until: desktop) {
+    display: block;
+  }
+
+  &__btn {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid #fff;
+    @include mq($from: desktop) {
+      flex: 3;
+      margin-left: $space-16;
+    }
+  }
+
+  .c-form-group__input {
+    border-radius: 5px;
+    border: 0;
+    background-color: #f5f5f5;
+
+    @include mq($until: desktop) {
+      margin-bottom: $space-16;
+    }
+  }
+}
+
+
+.c-subscribe__main {
+  margin-top: 40px;
+  margin-bottom: 100px;
+  padding: 0 16px;
+
+  &--title {
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 1.5;
+    letter-spacing: -0.03em;
+    text-align: center;
+    margin-bottom: 30px;
+
+    @include mq($from: desktop) {
+      padding: 0 54px;
+      max-width: 580px;
+      margin-bottom: 40px;
+      font-size: 24px;
+    }
+  }
+
+  &--form {
+    max-width: 768px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+
+    @include mq($from: desktop) {
+      flex-wrap: nowrap;
+    }
+
+    &-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .c-subscribe__main--form-input {
+      width: 100%;
+      border: 1px solid #000;
+      border-radius: 0;
+      background-color: #f5f5f5;
+      font-size: 14px;
+      font-weight: 500;
+
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      @include mq($from: desktop) {
+        max-width: 350px;
+        width: 350px;
+      }
+    }
+
+    .c-subscribe__main--form-submit {
+      height: 45px;
+      width: 100%;
+      min-width: 160px;
+      padding: 0 24px;
+      background-color: #000;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all ease 0.3s;
+
+      @include mq($from: desktop) {
+        width: fit-content;
+      }
+
+      &:hover {
+        background-color: #464646;
+        border-color: #464646;;
+      }
+    }
+  }
+}
+
+
+.c-subscribe__g {
+  margin-bottom: 60px;
+  padding: 32px 16px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
+  @include mq($from: desktop) {
+    display: flex;
+    gap: 32px;
+    padding: 32px 0;
+  }
+
+  &--side {
+    @include mq($from: desktop) {
+      flex-grow: 1;
+    }
+  }
+
+  &--label {
+    display: none;
+    color: #3c7eff;
+    font-size: 11px;
+    font-weight: 700;
+
+    @include mq($from: desktop) {
+      display: block;
+    }
+  }
+
+  &--title {
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: 'Nanum Myeongjo', serif;
+    line-height: 1.5;
+    letter-spacing: -0.03em;
+    text-align: center;
+    margin-bottom: 30px;
+
+    @include mq($from: desktop) {
+      margin-bottom: 0;
+      font-size: 14px;
+      text-align: start;
+    }
+  }
+
+  &--form {
+    max-width: 768px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+
+    @include mq($from: desktop) {
+      flex-wrap: nowrap;
+    }
+
+    &-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .c-subscribe__g--form-input {
+      max-width: 300px;
+      width: 100%;
+      border: 1px solid #000;
+      border-radius: 0;
+      background-color: #f5f5f5;
+      font-size: 14px;
+      font-weight: 500;
+
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      @include mq($from: desktop) {
+        width: 350px;
+      }
+    }
+
+    .c-subscribe__g--form-submit {
+      height: 45px;
+      min-width: 90px;
+      padding: 0 24px;
+      background-color: #000;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all ease 0.3s;
+
+      &:hover {
+        background-color: #464646;
+        border-color: #464646;;
+      }
+    }
+  }
+}
+
+.c-subscribe-stibee {
+  .c-subscribe-etc {
+    @include mq($from: desktop) {
+      column-gap: 60px;
+      padding: 56px 40px;
+    }
+  }
+
+  &__form {
+    flex-grow: 1;
+
+    @include mq($from: desktop) {
+      width: 580px;
+
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+
+    #stb_subscribe {
+      border: 0px;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .stb_header,
+    .stb_form_title,
+    .stb_form_description {
+      display: none;
+    }
+
+    .stb_form_set {
+
+    }
+
+    #stb_subscribe .stb_form_set .stb_form_set_label {
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #stb_subscribe .stb_form_set .stb_form_set_label.u-hidden {
+      display: none;
+    }
+
+    #stb_subscribe .stb_form_set .stb_form_set_input {
+      display: flex;
+      height: 45px;
+      align-items: center;
+      padding: 0 16px;
+    }
+
+
+    #stb_subscribe .stb_form_policy label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    #stb_subscribe .stb_form_policy label input {
+      -webkit-appearance: checkbox;
+      line-height: 1;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    #stb_subscribe .stb_form_submit_button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-color: var(--accent-color) !important;
+      border: 0px;
+      color: #fff;
+      border-radius: 3px;
+      height: 45px;
+      padding: 0 16px;
+      min-width: 140px;
+      width: fit-content;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+
+      position: relative;
+
+      @include attention() {
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+
+          background-color: rgba(0,0,0,0.2);
+        }
+      }
+
+      @include mq($until: desktop) {
+        min-width: auto;
+      }
+    }
+  }
+
+  #stb_subscribe_form {
+    @include mq($from: desktop) {
+      display: grid;
+
+      grid-template-areas:
+        "input-1 input-1 input-2 s-button"
+        "cb-1 cb-1 cb-2 cb-2";
+      gap: 10px;
+    }
+  }
+
+
+  @include mq($from: desktop) {
+    #stb_subscribe .stb_form_set,
+    #stb_subscribe .stb_form_policy {
+      padding: 0;
+    }
+
+    .stb_form_set:nth-of-type(1) {
+      grid-area: input-1;
+    }
+
+    .stb_form_set:nth-of-type(2) {
+      grid-area: input-2;
+
+      max-width: 150px;
+    }
+
+    .stb_form_policy:nth-of-type(1) {
+      grid-area: cb-1;
+    }
+
+    .stb_form_policy:nth-of-type(2) {
+      grid-area: cb-2;
+    }
+
+    #stb_subscribe .stb_form_set_submit {
+      grid-area: s-button;
+
+      padding: 0;
+      display: flex;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{{!-- Promotion banner --}}
+{{#match @custom.promotion_active "=" "on"}}
+<div class="c-home-promotion__outer">
+  <div class="o-grid">
+    <div class="o-grid__col">
+      <div class="c-home-promotion">
+        <div class="c-home-promotion__content">
+          <div class="c-home-promotion__text--top">{{@custom.promotion_text_top}}</div>
+          <div class="c-home-promotion__text--bottom">{{@custom.promotion_text_bottom}}</div>
+        </div>
+        <div class="c-home-promotion__action">
+          <a class="c-home-promotion__action--link" href="{{@custom.promotion_button_url}}">{{@custom.promotion_button_text}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/match}}

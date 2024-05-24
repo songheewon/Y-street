@@ -1,0 +1,129 @@
+{{!< default}}
+
+{{#contentFor 'body_custom_class'}} shop-template{{/contentFor}}
+
+
+<div class="swiper-container swiper-banner c-home-top-banner">
+    <div class="swiper-wrapper" >
+      {{#get "products" limit="5" filter="featured:true" include="tags" order="published_at desc" as |items|}}
+      {{#if items}}
+      {{#foreach products}}
+      <div class="swiper-slide">
+      <a href="{{url}}">
+        <div class="c-post-card__image--wrap">
+        {{#if feature_image}}
+          <img class="c-post-card__image"
+            alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}"
+            src="{{img_url feature_image}}" />
+        {{/if}}
+        </div>
+      </a>
+      </div>
+      {{/foreach}}
+      {{/if}}
+      {{/get}}
+    </div>
+    </div>
+<div class="c-shop-category">
+  <div class="o-grid">
+    <div class="c-shop-category__tags">
+      {{> shop/tags type="all" }}
+    </div>
+
+    {{#contentFor "custom_body_class"}} shop-template{{/contentFor}}
+
+<div class="s-products__container">
+  <div class="s-products-main">
+    <div class="o-grid" style="padding-left: 0; padding-right: 0; margin-top: 10px;">
+        {{> common/products/list static=static filter=filter }}
+        {{> common/products/pagination }}
+    </div>
+  </div>
+</div>
+{{> subscribe-box }}
+
+
+{{#contentFor "scripts"}}
+<script>
+const hasNextPage = () => {
+  var nextElement = document.querySelector('link[rel=next]');
+  if (nextElement) {
+    return true;
+  }
+  return false;
+}
+
+const disableLoadMore = () => {
+  var loadMoreAction = document.querySelectorAll('.js-load-more');
+  if (loadMoreAction.length) {
+    [].map.call(loadMoreAction, function (obj, idx) {
+      obj.classList.remove('active');
+    });
+  }
+}
+
+const activeLoadMore = () => {
+  var loadMoreAction = document.querySelectorAll('.js-load-more');
+  if (loadMoreAction.length) {
+    [].map.call(loadMoreAction, function (obj, idx) {
+      obj.classList.add('active');
+    });
+  }
+}
+
+const updateContents = (item) => {
+  var feedElement = document.querySelector('.js-content-feed');
+  if (feedElement) {
+    feedElement.appendChild(item);
+  }
+}
+
+//set load more event listener
+document.addEventListener("DOMContentLoaded", function(){
+  if(hasNextPage()) {
+    activeLoadMore();
+  }
+
+  var nextElement = document.querySelector('link[rel=next]');
+  var loadMoreAction = document.querySelectorAll('.js-load-more');
+  if (loadMoreAction.length) {
+    [].map.call(loadMoreAction, function (obj) {
+      obj.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        if (hasNextPage() && nextElement) {
+          var xhr = new window.XMLHttpRequest();
+
+          xhr.open('GET', nextElement.href);
+          xhr.responseType = 'document';
+          xhr.onreadystatechange = () => {
+            if(xhr.readyState === XMLHttpRequest.DONE) {
+              const status = xhr.status;
+              if (status === 0 || (status >= 200 && status < 400)) {
+                var postElements = xhr.response.querySelectorAll('.js-content-card');
+                postElements.forEach(function (item) {
+                  updateContents(item);
+                });
+
+                var resNextElement = xhr.response.querySelector('link[rel=next]');
+                if (resNextElement) {
+                  nextElement.href = resNextElement.href;
+                } else {
+                  nextElement = false;
+                  disableLoadMore();
+                }
+              } else {
+                //False
+              }
+            }
+          };
+          xhr.send(null);
+        }
+      });
+    });
+  }
+});
+</script>
+{{/contentFor}}
+  </div>
+</div>

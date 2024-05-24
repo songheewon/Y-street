@@ -1,0 +1,16 @@
+{{#foreach navigation}}
+  <li class='c-nav__item' style="{{#if @last}}margin-right: 0 !important{{/if}}">
+    <a href='{{ url absolute='true' }}' id="nav_id_{{@index}}" onclick="saveToLocalStorage({{@index}})" class='c-nav__link {{#if current}} c-nav__link--current {{/if}}'>{{ label }}</a>
+  </li>
+{{/foreach}}
+
+<script>
+  function saveToLocalStorage(idx) {
+  try {
+    console.log(idx);
+    sessionStorage.setItem("nav_id", JSON.stringify(idx));
+  } catch (error) {
+    console.error('로컬 스토리지에 값을 저장하는 동안 오류가 발생했습니다:', error);
+  }
+}
+</script>

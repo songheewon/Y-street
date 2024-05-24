@@ -1,0 +1,197 @@
+.bluedot-product-chapters {
+    margin: 0;
+    height: 720px;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-sidebar {
+    height: 720px;
+    background-color: #1A1A1A;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-main {
+    height: 720px;
+    background-color: #1A1A1A;
+    width: 60% !important;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-main-content {
+    width: 80%;
+    margin: 30px auto;
+    background-color: #1A1A1A;
+    height: 445px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.online-class-name {
+    color: #95A6FF;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 13px;
+    letter-spacing: -0.02em;
+}
+
+.bluedot-product-online {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 13px;
+    letter-spacing: -0.02em;
+    color: #95A6FF;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.bluedot-product-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.bluedot-product-excerpt {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: -0.02em;
+    color: #A0A0A0;
+    width: 80%;
+    margin: 5px auto;
+}
+
+.bluedot-product-date-info {
+    display: flex;
+    column-gap: 10px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.bluedot-product-date {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 17.38px;
+    color: #E1E3E8;
+}
+
+.bluedot-product-field {
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 17.38px;
+    color: #E1E3E8;
+}
+
+.bluedot-product-header {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.bluedot-product-wrap .bluedot-product-detail .bluedot-product-content-wrap {
+    max-width: 80%;
+}
+
+.bluedot-product-chapter-length {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 13px;
+    letter-spacing: -0.02em;
+    color: #B9B9B9;
+}
+
+.bluedot-product-chapter-length-num {
+    color: #FFF;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li .progress {
+    position: absolute;
+    left: 32px;
+    top: 75%;
+    width: 200px;
+    height: 5px;
+    background: #3D3D3D;
+    transform: translateY(-50%);
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li .progress .now {
+    background: #949393;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li.no-have-cover {
+    height: 50px;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li a {
+    height: 100%;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li .no {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.01em;
+    color: #6D6D6D;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li .title {
+    align-items: start;
+    padding-top: 8px;
+}
+
+.bluedot-product-chapter-header {
+    background-color: #000;
+}
+
+.bluedot-product-chapter-lesson-length {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 13px;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.bluedot-product-chapter-lesson-title {
+    color: #F8F8F8;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 16px;
+    letter-spacing: -0.02em;
+}
+
+.bluedot-product-chapters .bluedot-product-chapter-list ul li a.active,
+.bluedot-product-chapters .bluedot-product-chapter-list ul li a:hover {
+    background-color: #3f4249;
+}
+
+.bluedot-product-chapter-sidebar-top {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    align-items: center;
+}
+
+.bluedot-product-zip-download {
+    border: 1px solid white;
+    margin-right: 10px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 12px;
+    border-radius: 5px;
+    align-items: center;
+    column-gap: 5px;
+    display: flex;
+}
+
+.bluedot-product-wrap .bluedot-product-header .bluedot-product-cover {
+    flex: none;
+}
+
+.bluedot-product-wrap .bluedot-product-header.not-have-product-cover {
+    display: flex;
+    justify-content: start;
+}

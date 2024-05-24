@@ -1,0 +1,37 @@
+<div class="s-product-card js-content-card">
+  <div class="s-product-card__media">
+    <a href="{{url}}" class="s-product-card__link--cover"></a>
+    {{#if feature_image}}
+    <img alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else }}{{ title }}{{/if}}"
+      class="s-product-card__image" src="{{img_url feature_image}}">
+    {{/if}}
+  </div>
+  <div class="s-product-card__main">
+    {{#primary_tag}}
+    <div class="s-product-card__tag">
+      <div class="s-product-card__chip">{{name}}</div>
+    </div>
+    {{/primary_tag}}
+
+    {{#if payment.is_webinar}}
+    {{#if payment.event.used_event_date}}
+    {{#unless payment.event.event_is_past}}
+    <div class="s-product-card__date">
+      <div class="s-product-card__date--label">D - {{payment.event.event_d_day}}</div>
+    </div>
+    {{/unless}}
+    {{/if}}
+    {{/if}}
+
+    <div class="s-product-card__title">
+      <a href="{{url}}" class="s-product-card__link">{{title}}</a>
+    </div>
+    <div class="s-product-card__excerpt">
+      <a href="{{url}}">{{excerpt}}</a>
+    </div>
+    <div class="s-product-card__detail">
+      <div class="s-product-card__detail--date">{{date}}</div>
+      <div class="s-product-card__detail--author"><span class="s-product-card__detail--by">by&nbsp;</span>{{primary_author.name}}</div>
+    </div>
+  </div>
+</div>

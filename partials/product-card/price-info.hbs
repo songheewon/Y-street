@@ -1,0 +1,128 @@
+{{!-- Selling price info --}}
+
+{{#if payment.is_webinar}}
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">가격</div>
+  <div class="c-product-card__price--number">{{price payment.price currency="KRW"}}</div>
+</div>
+{{else}}
+
+{{#if payment.have_price_sale}}
+
+{{!-- <div class="c-product-card__price">
+  <div class="c-product-card__price--label">
+
+
+  </div>
+  <div class="c-product-card__price--number"></div>
+</div> --}}
+
+
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">
+  {{#if payment.have_price_original}}
+    일반가
+  {{else}}
+    일반가
+  {{/if}}
+  </div>
+  <div class="c-product-card__price--number">
+  {{#if @member.paid}}
+
+  {{else}}
+
+  {{/if}}
+
+  {{#match payment.price NaN}}
+  -
+  {{else match payment.price null}}
+  -
+  {{else match payment.price "=" 0}}
+  무료
+  {{else}}
+  {{!-- {{price payment.price currencyFormat="none" currency="KRW"}}원 --}}
+  {{price payment.price currency="KRW"}}
+  {{/match}}
+  </div>
+</div>
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">구독회원가</div>
+  <div class="c-product-card__price--number">
+    {{!-- {{price payment.price_sale currency="KRW"}} --}}
+  {{#match payment.price_sale NaN}}
+  -
+  {{else match payment.price_sale null}}
+  -
+  {{else match payment.price_sale "=" 0}}
+  무료
+  {{else}}
+  {{!-- {{price payment.price_sale currencyFormat="none" currency="KRW"}}원 --}}
+  {{price payment.price_sale currency="KRW"}}
+  {{/match}}
+  </div>
+</div>
+
+{{else}}
+  {{#unless payment.is_stop_selling}}
+  {{#if payment.have_price_original}}
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">일반가</div>
+  <div class="c-product-card__price--number">
+    {{!-- <i>{{price payment.price_original currency="KRW"}}</i> --}}
+  {{#match payment.price_original NaN}}
+  -
+  {{else match payment.price_original null}}
+  -
+  {{else match payment.price_original "=" 0}}
+  무료
+  {{else}}
+  {{!-- {{price payment.price_original currencyFormat="none" currency="KRW"}}원 --}}
+  {{price payment.price_original currency="KRW"}}
+  {{/match}}
+  </div>
+</div>
+
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">일반가</div>
+  <div class="c-product-card__price--number">
+    {{!-- <span class="bluedot-product-price-percent">{{payment.price_original_sale_percent}}<span class="symbol">%</span></span> --}}
+    {{!-- {{price payment.price currency="KRW"}} --}}
+  {{#match payment.price NaN}}
+  -
+  {{else match payment.price null}}
+  -
+  {{else match payment.price "=" 0}}
+  무료
+  {{else}}
+  {{!-- {{price payment.price currencyFormat="none" currency="KRW"}}원 --}}
+  {{price payment.price currency="KRW"}}
+  {{/match}}
+  </div>
+</div>
+
+  {{else}}
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">일반가</div>
+  <div class="c-product-card__price--number">
+    {{!-- {{price payment.price currency="KRW"}} --}}
+  {{#match payment.price NaN}}
+  -
+  {{else match payment.price null}}
+  -
+  {{else match payment.price "=" 0}}
+  무료
+  {{else}}
+  {{!-- {{price payment.price currencyFormat="none" currency="KRW"}}원 --}}
+  {{price payment.price currency="KRW"}}
+  {{/match}}
+  </div>
+</div>
+  {{/if}}
+  {{else}}
+<div class="c-product-card__price">
+  <div class="c-product-card__price--label">판매종료</div>
+  <div class="c-product-card__price--number"></div>
+</div>
+  {{/unless}}
+{{/if}}
+{{/if}}

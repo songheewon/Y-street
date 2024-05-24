@@ -1,0 +1,149 @@
+<header class="e-header c-header__container">
+  <div class="o-container">
+
+    <div class="c-header">
+      <div class="c-header__identity" style="width: 20% !important;">
+        <div class="c-header__logo">
+          <a href="{{ @site.url }}" class="c-logo__link" onclick="saveToLocalStorage(-1)">
+            {{#if @site.logo}}
+            <img class="c-logo__img" src="{{ @site.logo }}" alt="{{ @site.brand_site_title }}" style="transform: scale(2)">
+            {{else}}
+            {{ @site.brand_site_title }}
+            {{/if}}
+          </a>
+        </div>
+      </div>
+
+      <div class="c-header__map">
+        <div class="c-header__navigation" style="display: flex; list-style: none;">
+          {{navigation format="package"}}
+        </div>
+        <div class="c-header__actions">
+
+        </div>
+      </div>
+      <div class="c-header__login">
+        <div>
+          {{#if @member}}
+            <a href='#signout' class='c-nav__link c-nav__link--sign' data-members-signout>{{t 'Log out' }}</a>
+            {{else}}
+            <a href='{{ @site.url }}/signin/'>{{t 'Log in' }}</a>
+            {{/if}}
+        </div>
+        {{bluedot_search_button}}
+        {{#unless @member}}
+          <div class="c-header__top--subscribe">
+            <a href="{{ @site.url }}/membership/">구독하기</a>
+          </div>
+        {{/unless}} 
+      </div>
+    </div>
+    <div class="c-header-m">
+      <div class="c-header-m__behaviors">
+        <div class="c-header-m__hamburger js-nav-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </div>
+      </div>
+      <div class="c-header-m__main">
+
+        {{!-- Identity --}}
+        <div class="c-header__identity u-link__wrap">
+          <a href="{{ @site.url }}" class="u-link" onclick="saveToLocalStorage(-1)">
+          {{#if @site.logo}}
+          <img class="c-header__identity--img" src="{{ @site.logo }}" alt="{{ @site.brand_site_title }}">
+          {{else}}
+          <h1 class="c-header__identity--text">{{ @site.brand_site_title }}</h1>
+          {{/if}}
+          </a>
+        </div>
+      </div>
+
+
+      <div>
+        <a href='#' data-portal='account' class='c-nav__link js-nav__link-membership'>
+          <div class="c-header__member--profile"
+            style="aspect-ratio: 1 / 1; overflow: hidden; width: 25px; height: 25px; background-color: white; border: 1px solid gray;">
+            {{#if @member.avatar_image}}
+            <img src="{{@member.avatar_image}}" alt="">
+            {{else}}
+            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12.0079 1.15803e-06C9.63379 -0.0010415 7.31269 0.702015 5.33817 2.02025C3.36365 3.33848 1.82442 5.21267 0.915165 7.40577C0.00590585 9.59888 -0.232539 12.0124 0.22999 14.341C0.692519 16.6696 1.83524 18.8088 3.51363 20.4879C5.19202 22.167 7.33068 23.3107 9.6591 23.7743C11.9875 24.2378 14.4011 24.0004 16.5946 23.0921C18.7881 22.1838 20.663 20.6454 21.9821 18.6715C23.3012 16.6976 24.0053 14.3768 24.0053 12.0026C24.006 10.4267 23.6962 8.86602 23.0935 7.40983C22.4909 5.95363 21.6073 4.63043 20.4932 3.51581C19.3791 2.40119 18.0563 1.517 16.6003 0.91375C15.1444 0.310497 13.5839 1.00592e-06 12.0079 1.15803e-06ZM12.0079 3.58972C12.793 3.58972 13.5604 3.82251 14.2131 4.25866C14.8658 4.69481 15.3746 5.31472 15.675 6.04001C15.9754 6.76529 16.054 7.56338 15.9009 8.33334C15.7477 9.1033 15.3697 9.81055 14.8146 10.3657C14.2595 10.9208 13.5522 11.2988 12.7823 11.452C12.0123 11.6051 11.2142 11.5265 10.4889 11.2261C9.76366 10.9257 9.14375 10.4169 8.7076 9.76417C8.27145 9.11143 8.03866 8.34402 8.03866 7.55897C8.03866 6.50626 8.45685 5.49667 9.20123 4.75229C9.94561 4.00791 10.9552 3.58972 12.0079 3.58972ZM12.0079 20.8636C9.90585 20.8676 7.87166 20.1198 6.27279 18.7551C6.08695 18.5961 5.93755 18.3989 5.83476 18.1769C5.73198 17.955 5.67822 17.7135 5.67714 17.4689C5.67783 16.9415 5.78266 16.4194 5.98561 15.9326C6.18857 15.4458 6.48565 15.0038 6.85983 14.6321C7.234 14.2604 7.67789 13.9662 8.16603 13.7664C8.65417 13.5667 9.17695 13.4653 9.70438 13.468H14.322C14.8489 13.4653 15.3712 13.5667 15.8587 13.7666C16.3463 13.9665 16.7895 14.2608 17.1628 14.6327C17.5362 15.0046 17.8322 15.4466 18.034 15.9334C18.2359 16.4201 18.3394 16.942 18.3387 17.4689C18.339 17.7137 18.2859 17.9557 18.183 18.1778C18.0801 18.4 17.93 18.597 17.743 18.7551C16.1428 20.1209 14.1065 20.8689 12.0026 20.8636H12.0079Z"
+                fill="black" />
+            </svg>
+            {{/if}}
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <div class="c-header-drawer">
+    <div class="c-header-drawer__inner">
+      <div class="c-header-drawer__header">
+        {{!-- Identity --}}
+        <div class="c-header__identity u-link__wrap">
+          <a href="{{ @site.url }}" class="u-link" onclick="saveToLocalStorage(-1)">
+          {{#if @site.logo}}
+          <img class="c-header__identity--img" src="{{ @site.logo }}" alt="{{ @site.brand_site_title }}">
+          {{else}}
+          <h1 class="c-header__identity--text">{{ @site.brand_site_title }}</h1>
+          {{/if}}
+          </a>
+        </div>
+
+        <div class="c-header-drawer__toggle js-nav-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+      </div>
+      <div class="c-header-drawer__main">
+        <div class="c-header-drawer__main--header">
+          <div class="c-header-mobile__nav--subscribe">
+            구독하기
+          </div>
+          {{!-- Search form --}}
+          <div class="c-header__search--outer">
+            <div class="c-header__search">
+              <form class="c-header__search--form">
+                <input class="c-header__search--input" type="text" name="stx" value="" placeholder="검색..">
+                <button type="submit" class="c-header__search--submit">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M6.37472 7.46828C6.11182 7.6073 5.88096 7.75186 5.63251 7.85642C4.53483 8.3222 3.43675 8.31626 2.35117 7.81444C1.54646 7.44253 0.931991 6.85477 0.502682 6.07174C0.146083 5.41713 -0.0266312 4.6759 0.00332932 3.92869C0.0332898 3.18149 0.264778 2.45692 0.672609 1.83381C1.05373 1.24669 1.57868 0.769983 2.19609 0.45035C2.8704 0.0997684 3.62851 -0.0510344 4.38348 0.0152358C5.13845 0.0815059 5.85971 0.362167 6.46457 0.825031C7.21303 1.39695 7.7146 2.14394 7.94898 3.06321C8.22243 4.14804 8.08063 5.18257 7.52983 6.15492C7.47866 6.24522 7.48022 6.29314 7.55561 6.36839C8.27907 7.09557 8.99784 7.82791 9.71896 8.55746C9.96857 8.80976 10.0639 9.10285 9.95334 9.4502C9.78888 9.97222 9.1162 10.1742 8.69783 9.82805C8.6451 9.78409 8.59432 9.73735 8.54588 9.68863C7.84117 8.97571 7.13698 8.2616 6.43332 7.5463C6.41174 7.52194 6.39215 7.49584 6.37472 7.46828ZM6.77239 4.09457C6.76497 2.56496 5.52978 1.31734 4.0352 1.33002C2.51914 1.34309 1.30075 2.58436 1.30895 4.10526C1.31872 5.63607 2.54883 6.87457 4.05044 6.86467C5.55204 6.85477 6.77942 5.61072 6.77239 4.09457Z"
+                      fill="#CCCCCC" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <ul class="c-header__nav o-plain-list" style="width: 95%; margin: 0 auto; margin-top: -35px;">
+          {{ navigation isDrawer="drawer"}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+{{#contentFor "scripts"}}
+<script>
+  // Header Search form
+  var hSearchForm = document.querySelectorAll(".c-header__search--form");
+  [].map.call(hSearchForm, function (obj, idx) {
+    obj.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var searchParam = $(this).find('.c-header__search--input')[0].value;
+      window.location.href = '{{@site.url}}' + '/search/' + encodeURIComponent(searchParam.trim());
+      return false;
+    });
+  });
+</script>
+{{/contentFor}}

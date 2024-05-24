@@ -1,0 +1,40 @@
+{{#contentFor 'title'}}{{ meta_title }}{{/contentFor}}
+
+{{#get "tags" filter="slug:{{slug}}"}}
+{{#if tags}}
+{{#foreach tags}}
+<div class="o-grid">
+  <div class="o-grid__col">
+    <div class='c-archive'>
+      <h1 class='c-archive__title'>{{ name }}</h1>
+      {{#if description}}
+        <p class='c-archive__description'>{{ description }}</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
+{{/foreach}}
+{{/if}}
+{{/get}}
+
+<div class="o-grid">
+  <div class="o-grid__col">
+    <div class="c-archive-grid__outer">
+      {{#get "products" include="tags,authors" filter="tag:{{slug}}" limit="24" order="published_at desc"}}
+      {{#if products}}
+      <div class="c-archive-grid js-grid">
+      {{#foreach products}}
+        {{> product-card}}
+      {{/foreach}}
+      </div>
+      {{/if}}
+      {{/get}}
+    </div>
+  </div>
+</div>
+
+{{!-- <div class="o-grid">
+  <div class="o-grid__col">
+  {{ pagination }}
+  </div>
+</div> --}}

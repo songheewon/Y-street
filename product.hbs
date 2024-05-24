@@ -1,0 +1,8 @@
+{{!< default}} {{#contentFor 'body_custom_class' }} shop-template{{/contentFor}} {{bluedot_product}} {{#if
+    product.payment.is_online_class}} {{#if product.payment_status.is_paid}} <style>
+    .bluedot-product-header {
+    display: none !important;
+    }
+    </style>
+    {{/if}}
+    {{/if}}
